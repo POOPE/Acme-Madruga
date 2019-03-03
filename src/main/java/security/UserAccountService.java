@@ -10,6 +10,9 @@
 
 package security;
 
+import java.util.Collection;
+import java.util.HashSet;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,6 +50,22 @@ public class UserAccountService {
 		return result;
 	}
 
+	public UserAccount createUserAccount(final String authority) {
+		final UserAccount user = new UserAccount();
+		final Collection<Authority> auths = new HashSet<>();
+		final Authority auth = new Authority();
+		auth.setAuthority(authority);
+		auths.add(auth);
+		user.setAuthorities(auths);
+		return user;
+	}
+
 	// Other business methods -------------------------------------------------
 
+	public UserAccount addAuthority(final UserAccount user, final String authority) {
+		final Authority auth = new Authority();
+		auth.setAuthority(authority);
+		user.getAuthorities().add(auth);
+		return user;
+	}
 }

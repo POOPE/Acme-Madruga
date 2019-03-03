@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -39,13 +40,15 @@ public class ActorController {
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ModelAndView save(@Valid final RegisterForm registerForm, final BindingResult binding) {
+	public ModelAndView save(@ModelAttribute("regForm") @Valid final RegisterForm registerForm, final BindingResult binding) {
 		ModelAndView res;
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(registerForm);
 		else
 			try {
-				res = null;
+				this.actorService.register(registerForm);
+				res = new ModelAndView("redirect:../security/login.do");
+				;
 			} catch (final Exception e) {
 				res = this.createEditModelAndView(registerForm, "actor.commit.error");
 			}

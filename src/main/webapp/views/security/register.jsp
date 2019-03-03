@@ -20,7 +20,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="actor/register" modelAttribute="regForm" id="regForm">
+<form:form action="actor/register.do" modelAttribute="regForm" id="regForm">
 	<div class="box">
 		<div>
 			<b><spring:message code="actor.account" /></b>
@@ -46,7 +46,10 @@
 		<form:hidden path="areaCode" id="hidden-ac"/>
 		<form:hidden path="phoneNumber" id="hidden-pn"/>
 		<!-- /phone number -->
-		<input type="text" placeholder="+XX (XX) XXXX" id="phoneinput"/>
+		<div>
+			<spring:message code="actor.phonenumber" />
+			<input type="text" placeholder="+XX (XX) XXXX" id="phoneinput"/>
+		</div>
 		<acme:textbox code="actor.address" path="address" />
 	</div>
 	<div>

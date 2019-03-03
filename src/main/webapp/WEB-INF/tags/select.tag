@@ -58,10 +58,9 @@
 		<!-- string list as codes-->
 		<jstl:if test="${itemLabel==null && itemsAsCodes!=null}">
 			<jstl:forEach items="${items}" var="item">
-				
-				<spring:message code="${item}" var="code"/>
-			
-				<form:option value="${code}" itemLabel="${item}" />
+				<form:option value="${item}">
+					<spring:message code="${item}"/>
+				</form:option>
 			</jstl:forEach>
 		</jstl:if>
 	</form:select>

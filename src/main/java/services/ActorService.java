@@ -21,6 +21,7 @@ import repositories.ActorRepository;
 import security.UserAccount;
 import security.UserAccountService;
 import domain.Actor;
+import forms.RegisterForm;
 
 @Service
 @Transactional
@@ -35,6 +36,8 @@ public class ActorService {
 
 	@Autowired
 	private UserAccountService	userAccountService;
+	@Autowired
+	private MemberService		memberService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -48,50 +51,68 @@ public class ActorService {
 	public Collection<Actor> findAll() {
 		Collection<Actor> result;
 
-		result = actorRepository.findAll();
+		result = this.actorRepository.findAll();
 		Assert.notNull(result);
 
 		return result;
 	}
 
-	public Actor findOne(int actorId) {
+	public Actor findOne(final int actorId) {
 		Assert.isTrue(actorId != 0);
 
 		Actor result;
 
-		result = actorRepository.findOne(actorId);
+		result = this.actorRepository.findOne(actorId);
 		Assert.notNull(result);
 
 		return result;
 	}
 
-	public Actor save(Actor actor) {
+	public Actor save(final Actor actor) {
 		Assert.notNull(actor);
 
 		Actor result;
 
-		result = actorRepository.save(actor);
+		result = this.actorRepository.save(actor);
 
 		return result;
 	}
 
-	public void delete(Actor actor) {
+	public void delete(final Actor actor) {
 		Assert.notNull(actor);
 		Assert.isTrue(actor.getId() != 0);
-		Assert.isTrue(actorRepository.exists(actor.getId()));
+		Assert.isTrue(this.actorRepository.exists(actor.getId()));
 
-		actorRepository.delete(actor);
+		this.actorRepository.delete(actor);
 	}
 
 	// Other business methods -------------------------------------------------
 
-	public UserAccount findUserAccount(Actor actor) {
+	public UserAccount findUserAccount(final Actor actor) {
 		Assert.notNull(actor);
 
 		UserAccount result;
 
-		result = userAccountService.findByActor(actor);
+		result = this.userAccountService.findByActor(actor);
 
 		return result;
+	}
+
+	public void register(final RegisterForm registerForm) {
+		final String role = registerForm.getRole();
+		switch (role) {
+		case "MEMBER":
+			this.memberService.register(registerForm);
+			break;
+		case "BROTHERHOOD":
+			break;
+		}
+	}
+
+	public Actor initialize(final Actor actor, final String authority) {
+		actor.setPhoto("https://www.qualiscare.com/wp-content/uploads/2017/08/default-user-300x300.png");
+		actor.setUserAccount(this.userAccountService.createUserAccount(authority));
+
+		return actor;
 	}
 }

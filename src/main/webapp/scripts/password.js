@@ -5,11 +5,11 @@ var matchpattern = false;
 
 if (form.addEventListener) {
 	form.addEventListener("submit", function(evt) {
-		validateForm(evt);
+		validatePass(evt);
 	}, true);
 } else {
 	form.attachEvent('onsubmit', function(evt) {
-		validateForm(evt);
+		validatePass(evt);
 	});
 }
 
@@ -38,13 +38,12 @@ function checkRegex() {
 
 }
 
-function validateForm(evt) {
-	checkuser(passinput.value);
+function validatePass(evt) {
 	if (comparePass() && matchpattern) {
 		return true;
 	} else {
 		evt.preventDefault();
-		$("#form").effect("shake");
+		alert("Passwords don't match!");
 		return false;
 	}
 }

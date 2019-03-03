@@ -2,23 +2,73 @@ var phoneinput = document.getElementById("phoneinput");
 var cc = document.getElementById("hidden-cc");
 var ac = document.getElementById("hidden-ac");
 var pn = document.getElementById("hidden-pn");
-var matchpattern = false;
+var form = document.getElementById("regForm");
+
+if (cc.value || ac.value || pn.value) {
+	var inputstring = "";
+	if (cc.value) {
+		inputstring = inputstring + "+" + cc.value + " ";
+	}
+	if (ac.value) {
+		inputstring = inputstring + "(" + ac.value + ") ";
+	}
+	if (pn.value) {
+		inputstring = inputstring + pn.value;
+	}
+	phoneinput.value = inputstring;
+}
 
 if (form.addEventListener) {
 	form.addEventListener("submit", function(evt) {
-		validateForm(evt);
+		validatePhone(evt);
 	}, true);
 } else {
 	form.attachEvent('onsubmit', function(evt) {
-		validateForm(evt);
+		validatePhone(evt);
 	});
 }
 
 phoneinput.addEventListener("keyup", function() {
-	checkPhone();
+	formatPhone();
 });
 
+function validatePhone(evt) {
+	if (checkPhone()) {
+		return true;
+	} else {
+		evt.preventDefault();
+		return false;
+	}
+}
+
 function checkPhone() {
+	res = true;
+	if (!cc.value && ac.value && pn.value || !pn.value) {
+		res = confirmPhone();
+	}
+	return res;
+}
+
+function confirmPhone() {
+	res = false;
+	var formattednumber = "";
+	if (cc.value) {
+		formattednumber = "+" + cc.value;
+	}
+	if (ac.value) {
+		formattednumber = formattednumber + " (" + ac.value + ") ";
+	}
+	if (pn.value) {
+		formattednumber = formattednumber + " " + pn.value;
+	}
+	var rconfirm = confirm("Phone number " + formattednumber + " does not follow allowed format. Save anyways?");
+	if (rconfirm) {
+		res = true;
+	}
+	return res;
+}
+
+function formatPhone() {
 	var phoneval = phoneinput.value;
 	var countrycode = "";
 	var areacode = "";
@@ -80,15 +130,4 @@ function checkPhone() {
 	cc.value = countrycode;
 	ac.value = areacode;
 	pn.value = phonenumber;
-}
-
-function validateForm(evt) {
-	checkuser(passinput.value);
-	if (comparePass() && matchpattern) {
-		return true;
-	} else {
-		evt.preventDefault();
-		$("#form").effect("shake");
-		return false;
-	}
 }
