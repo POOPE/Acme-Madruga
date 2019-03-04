@@ -67,8 +67,6 @@ public class ActorController {
 		ModelAndView result;
 		final ArrayList<String> roles = new ArrayList<>();
 		roles.add("MEMBER");
-		if (this.adminService.findPrincipal() != null)
-			roles.add("ADMIN");
 
 		result = new ModelAndView("security/register");
 		result.addObject("regForm", registerForm);
