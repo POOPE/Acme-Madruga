@@ -20,18 +20,21 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="actor/register.do" modelAttribute="regForm" id="regForm">
+<form:form action="actor/register.do" modelAttribute="regForm"
+	id="regForm">
 	<div class="box">
 		<div>
 			<b><spring:message code="actor.account" /></b>
 		</div>
-		<acme:select code="actor.role" items="${roles}" path="role" itemsAsCodes="true"/>
+		<acme:select code="actor.role" items="${roles}" path="role"
+			itemsAsCodes="true" />
 		<acme:textbox code="actor.username" path="username" />
-		<acme:password code="actor.password" path="password" id="password" tooltip="actor.password.tooltip"/>
+		<acme:password code="actor.password" path="password" id="password"
+			tooltip="actor.password.tooltip" />
 		<div>
 			<spring:message code="actor.confirmpass" />
-			<input type="password" id="comparepass" />
-			<i id="confirmpassstatus" class="fa" aria-hidden="true"></i>
+			<input type="password" id="comparepass" /> <i id="confirmpassstatus"
+				class="fa" aria-hidden="true"></i>
 		</div>
 	</div>
 	<div class="box">
@@ -42,18 +45,31 @@
 		<acme:textbox code="actor.middlename" path="middleName" />
 		<acme:textbox code="actor.lastname" path="lastName" />
 		<!--  phone number -->
-		<form:hidden path="countryCode" id="hidden-cc"/>
-		<form:hidden path="areaCode" id="hidden-ac"/>
-		<form:hidden path="phoneNumber" id="hidden-pn"/>
+		<form:hidden path="countryCode" id="hidden-cc" />
+		<form:hidden path="areaCode" id="hidden-ac" />
+		<form:hidden path="phoneNumber" id="hidden-pn" />
 		<!-- /phone number -->
 		<div>
 			<spring:message code="actor.phonenumber" />
-			<input type="text" placeholder="+XX (XX) XXXX" id="phoneinput"/>
+			<input type="text" placeholder="+XX (XX) XXXX" id="phoneinput" />
 		</div>
 		<acme:textbox code="actor.address" path="address" />
 	</div>
-	<div>
-		<acme:submit name="save" code="actor.register"/>
+
+	<div class="box">
+		<div>
+			<acme:textbox code="actor.title" path="title" />
+			<spring:message code="actor.photos" />
+			<form:hidden path="photos" id="hidden-attachments" />
+			<input type="text" id="attachment-input" />
+			<button id="attachment-add">
+				<spring:message code="add" />
+			</button>
+		</div>
+		<div id="attachments"></div>
+		<div>
+			<acme:submit name="save" code="actor.register" />
+		</div>
 	</div>
 </form:form>
 

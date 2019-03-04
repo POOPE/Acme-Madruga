@@ -158,7 +158,9 @@
 		<property name="phoneNumber" value="666666666" />
 		<property name="address" value="Address 3" />
 		<property name="photo" value="https://www.bewelcome.org/members/avatar/doge?500"/>
-		<property name="userAccount" ref="userAccount5" />		
+		<property name="userAccount" ref="userAccount5" />	
+		<property name="title" value="EL GRAN PODEH"/>
+		<property name="estDate" value="15/11/2017 20:32"/>			
 	</bean>
 	
 	<bean id="brother2" class="domain.Brotherhood">
@@ -171,7 +173,9 @@
 		<property name="phoneNumber" value="666666666" />
 		<property name="address" value="Address 33" />
 		<property name="photo" value="https://www.bewelcome.org/members/avatar/doge?500"/>
-		<property name="userAccount" ref="userAccount6" />		
+		<property name="userAccount" ref="userAccount6" />	
+		<property name="title" value="LA BORRICA"/>
+		<property name="estDate" value="15/11/2017 20:32"/>		
 	</bean>	
 	
 	

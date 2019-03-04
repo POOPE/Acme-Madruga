@@ -11,6 +11,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ActorRepository;
+import security.Authority;
+import security.LoginService;
 import security.UserAccount;
 import security.UserAccountService;
 import domain.Actor;
@@ -38,6 +41,8 @@ public class ActorService {
 	private UserAccountService	userAccountService;
 	@Autowired
 	private MemberService		memberService;
+	@Autowired
+	private AdminService		adminService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -104,15 +109,41 @@ public class ActorService {
 		case "MEMBER":
 			this.memberService.register(registerForm);
 			break;
-		case "BROTHERHOOD":
+		case "ADMIN":
+			this.adminService.findPrincipal();
+			this.adminService.register(registerForm);
 			break;
 		}
 	}
-
 	public Actor initialize(final Actor actor, final String authority) {
 		actor.setPhoto("https://www.qualiscare.com/wp-content/uploads/2017/08/default-user-300x300.png");
 		actor.setUserAccount(this.userAccountService.createUserAccount(authority));
 
 		return actor;
+	}
+
+	public void assertPrincipalAuthority(final String auth) {
+		Assert.isTrue(this.getPrincipalAuthority().contains(auth), "The user logged does not have authority to do this action.");
+
+	}
+
+	public Actor findPrincipal() {
+		return this.actorRepository.findByUser(LoginService.getPrincipal().getId());
+	}
+
+	public Collection<String> getPrincipalAuthority() {
+		final Collection<Authority> auth = this.findPrincipal().getUserAccount().getAuthorities();
+		final Collection<String> res = new HashSet<>();
+		for (final Authority a : auth)
+			res.add(a.getAuthority());
+		return res;
+	}
+
+	public Collection<String> getAuthority(final Actor actor) {
+		final Collection<Authority> auth = actor.getUserAccount().getAuthorities();
+		final Collection<String> res = new HashSet<>();
+		for (final Authority a : auth)
+			res.add(a.getAuthority());
+		return res;
 	}
 }

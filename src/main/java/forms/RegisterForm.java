@@ -21,10 +21,28 @@ public class RegisterForm {
 	private String				username;
 	private String				password;
 	private String				photo;
+	private String				title;
+	private String				photos;
 
 	public static final String	MEMBER		= "MEMBER";
 	public static final String	BROTHERHOOD	= "BROTHERHOOD";
 
+
+	public String getTitle() {
+		return this.title;
+	}
+
+	public void setTitle(final String title) {
+		this.title = title;
+	}
+
+	public String getPhotos() {
+		return this.photos;
+	}
+
+	public void setPhotos(final String photos) {
+		this.photos = photos;
+	}
 
 	@NotBlank
 	@Size(min = 4, max = 32, message = "Username must have 4 to 32 characters")

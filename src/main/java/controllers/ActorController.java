@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
+import services.AdminService;
 import services.BrotherhoodService;
 import services.MemberService;
 import forms.RegisterForm;
@@ -28,6 +29,8 @@ public class ActorController {
 	private BrotherhoodService	brotherhoodService;
 	@Autowired
 	private ActorService		actorService;
+	@Autowired
+	private AdminService		adminService;
 
 
 	//REGISTER
@@ -64,7 +67,8 @@ public class ActorController {
 		ModelAndView result;
 		final ArrayList<String> roles = new ArrayList<>();
 		roles.add("MEMBER");
-		roles.add("BROTHERHOOD");
+		if (this.adminService.findPrincipal() != null)
+			roles.add("ADMIN");
 
 		result = new ModelAndView("security/register");
 		result.addObject("regForm", registerForm);
