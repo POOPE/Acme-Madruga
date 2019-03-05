@@ -160,7 +160,7 @@
 		<property name="photo" value="https://www.bewelcome.org/members/avatar/doge?500"/>
 		<property name="userAccount" ref="userAccount5" />	
 		<property name="title" value="EL GRAN PODEH"/>
-		<property name="estDate" value="15/11/2017 20:32"/>			
+		<property name="estDate" value="3/11/2017 20:32"/>			
 	</bean>
 	
 	<bean id="brother2" class="domain.Brotherhood">
@@ -175,8 +175,30 @@
 		<property name="photo" value="https://www.bewelcome.org/members/avatar/doge?500"/>
 		<property name="userAccount" ref="userAccount6" />	
 		<property name="title" value="LA BORRICA"/>
-		<property name="estDate" value="15/11/2017 20:32"/>		
+		<property name="estDate" value="4/11/2017 20:32"/>		
 	</bean>	
+	
+	
+	<!-- Reviewers -->
+	
+	<bean id="enrollment1" class="domain.Enrollment">
+		
+		<property name="member" ref="member1" />
+		<property name="broder" ref="brother1" />	
+		<property name="position" value="Presidente"/>
+		<property name="moment" value="03/11/2017 20:32"/>	
+		<property name="dropIn" value="03/12/2018 20:31"/>
+		<property name="memberIn" value="false"/>		
+	</bean>
+	
+	<bean id="enrollment2" class="domain.Enrollment">
+		
+		<property name="member" ref="member2" />
+		<property name="broder" ref="brother2" />	
+		<property name="position" value="Promotor"/>
+		<property name="moment" value="03/11/2017 20:32"/>
+		<property name="memberIn" value="true"/>		
+	</bean>
 	
 	
 </beans>
