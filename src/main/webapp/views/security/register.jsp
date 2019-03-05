@@ -26,7 +26,7 @@
 		<div>
 			<b><spring:message code="actor.account" /></b>
 		</div>
-		<acme:select code="actor.role" items="${roles}" path="role"
+		<acme:select onchange="checkBrotherhood();" id="role" code="actor.role" items="${roles}" path="role"
 			itemsAsCodes="true" />
 		<acme:textbox code="actor.username" path="username" />
 		<acme:password code="actor.password" path="password" id="password"
@@ -56,7 +56,10 @@
 		<acme:textbox code="actor.address" path="address" />
 	</div>
 
-	<div class="box">
+	<div class="box hidden" id="brotherhood-info">
+		<div>
+			<b><spring:message code="actor.brotherhood" /></b>
+		</div>
 		<div>
 			<acme:textbox code="actor.title" path="title" />
 			<spring:message code="actor.photos" />
@@ -77,3 +80,4 @@
 <script type="text/javascript" src="scripts/password.js"></script>
 <script type="text/javascript" src="scripts/phonenum.js"></script>
 <script type="text/javascript" src="scripts/photos.js"></script>
+<script type="text/javascript" src="scripts/register.js"></script>

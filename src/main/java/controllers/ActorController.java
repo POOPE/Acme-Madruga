@@ -51,7 +51,6 @@ public class ActorController {
 			try {
 				this.actorService.register(registerForm);
 				res = new ModelAndView("redirect:../security/login.do");
-				;
 			} catch (final Exception e) {
 				res = this.createEditModelAndView(registerForm, "actor.commit.error");
 			}
@@ -67,6 +66,7 @@ public class ActorController {
 		ModelAndView result;
 		final ArrayList<String> roles = new ArrayList<>();
 		roles.add("MEMBER");
+		roles.add("BROTHERHOOD");
 
 		result = new ModelAndView("security/register");
 		result.addObject("regForm", registerForm);

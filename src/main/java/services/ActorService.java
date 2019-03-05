@@ -43,6 +43,8 @@ public class ActorService {
 	private MemberService		memberService;
 	@Autowired
 	private AdminService		adminService;
+	@Autowired
+	private BrotherhoodService	brotherhoodService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -112,6 +114,9 @@ public class ActorService {
 		case "ADMIN":
 			this.adminService.findPrincipal();
 			this.adminService.register(registerForm);
+			break;
+		case "BROTHERHOOD":
+			this.brotherhoodService.register(registerForm);
 			break;
 		}
 	}
