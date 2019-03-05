@@ -15,8 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.AdminService;
+import services.AttachmentService;
 import services.BrotherhoodService;
 import services.MemberService;
+import domain.Actor;
+import domain.Attachment;
+import domain.Brotherhood;
 import forms.RegisterForm;
 
 @Controller
@@ -31,6 +35,8 @@ public class ActorController {
 	private ActorService		actorService;
 	@Autowired
 	private AdminService		adminService;
+	@Autowired
+	private AttachmentService	attachmentService;
 
 
 	//REGISTER
@@ -57,6 +63,20 @@ public class ActorController {
 		return res;
 	}
 
+	@RequestMapping(value = "/profile", method = RequestMethod.GET)
+	public ModelAndView profile() {
+		ModelAndView res;
+		res = new ModelAndView("actor/profile");
+		final Actor actor = this.actorService.findPrincipal();
+		if (this.actorService.getPrincipalAuthority().contains("BROTHERHOOD")) {
+			final Brotherhood brotherhood = (Brotherhood) actor;
+			res.addObject("actor", brotherhood);
+			final ArrayList<Attachment> attachments = this.attachmentService.findByOwner(brotherhood);
+			res.addObject("photos", attachments);
+		} else
+			res.addObject("actor", actor);
+		return res;
+	}
 	//AUX
 	protected ModelAndView createEditModelAndView(final RegisterForm registerForm) {
 		return this.createEditModelAndView(registerForm, null);

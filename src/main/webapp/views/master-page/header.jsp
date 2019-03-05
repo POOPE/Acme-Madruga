@@ -36,7 +36,7 @@
 			</li>
 		</security:authorize>		
 
-		<security:authorize access="hasRole('CUSTOMER')">
+		<security:authorize access="hasRole('MEMBER')">
 			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
 				<ul>
 					<li class="arrow"></li>
@@ -46,7 +46,7 @@
 			</li>
 		</security:authorize>
 
-		<security:authorize access="hasRole('REVIEWER')">
+		<security:authorize access="hasRole('BROTHERHOOD')">
 			<li><a class="fNiv"><spring:message	code="master.page.reviewer" /></a>
 				<ul>
 					<li class="arrow"></li>
@@ -68,6 +68,8 @@
 				</a>
 				<ul>
 					<li class="arrow"></li>
+					<li><a href="actor/profile.do"><spring:message code="master.page.profile" /></a></li>
+					<li><a href="user/password.do"><spring:message code="master.page.password" /></a></li>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.profile.logout" /> </a></li>
 				</ul>
 			</li>

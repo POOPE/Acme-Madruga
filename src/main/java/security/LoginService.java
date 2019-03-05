@@ -11,6 +11,7 @@
 package security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -33,12 +34,13 @@ public class LoginService implements UserDetailsService {
 
 	// Business methods -------------------------------------------------------
 
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	@Override
+	public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
 		Assert.notNull(username);
 
 		UserDetails result;
 
-		result = userRepository.findByUsername(username);
+		result = this.userRepository.findByUsername(username);
 		Assert.notNull(result);
 		// WARNING: The following sentences prevent lazy initialisation problems!
 		Assert.notNull(result.getAuthorities());
@@ -71,6 +73,17 @@ public class LoginService implements UserDetailsService {
 		Assert.isTrue(result.getId() != 0);
 
 		return result;
+	}
+
+	//check password
+	public boolean checkPassword(final String pass) {
+		boolean res = false;
+		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		final String hash = encoder.encodePassword(pass, null);
+		final UserAccount user = LoginService.getPrincipal();
+		if (user.getPassword().contains(hash))
+			res = true;
+		return res;
 	}
 
 }

@@ -1,6 +1,8 @@
 
 package services;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +33,10 @@ public class AttachmentService {
 		res.setOwner(actor);
 		res.setURL(URL);
 		return this.save(res);
+	}
+
+	public ArrayList<Attachment> findByOwner(final Actor owner) {
+		return this.attachmentRepository.findByOwner(owner.getId());
 	}
 
 	public Attachment save(final Attachment attachment) {

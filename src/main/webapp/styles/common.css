@@ -18,6 +18,19 @@
 	height: 150px;
 	width: 150px;
 	cursor: pointer;
+	display:inline-block;
+	margin:10px 10px 10px 10px;
+}
+
+.thumb {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	height: 150px;
+	width: 150px;
+	border-radius:50%;
+	display:inline-block;
+	margin:10px 10px 10px 10px;
 }
 
 /* Tooltip container */
