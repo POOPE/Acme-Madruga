@@ -38,7 +38,8 @@ public class BrotherhoodService {
 		brotherhood.setMiddleName(registerForm.getMiddleName());
 		brotherhood.setName(registerForm.getFirstName());
 		brotherhood.setPhoneNumber(registerForm.getPhoneNumber());
-		brotherhood.setPhoto(registerForm.getPhoto());
+		if (registerForm.getPhoto() != null && registerForm.getPhoto() != "")
+			brotherhood.setPhoto(registerForm.getPhoto());
 		brotherhood.setSurname(registerForm.getLastName());
 		brotherhood.setTitle(registerForm.getTitle());
 		brotherhood.setEstDate(new Date());

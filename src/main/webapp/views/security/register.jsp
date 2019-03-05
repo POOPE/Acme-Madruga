@@ -44,6 +44,9 @@
 		<acme:textbox code="actor.firstname" path="firstName" />
 		<acme:textbox code="actor.middlename" path="middleName" />
 		<acme:textbox code="actor.lastname" path="lastName" />
+		<acme:textbox code="actor.email" path="email" />
+		<acme:textbox code="actor.address" path="address" />
+		<acme:textbox code="actor.photo" path="photo" />
 		<!--  phone number -->
 		<form:hidden path="countryCode" id="hidden-cc" />
 		<form:hidden path="areaCode" id="hidden-ac" />

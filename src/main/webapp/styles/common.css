@@ -11,6 +11,15 @@
 	display: none;
 }
 
+.inline {
+	display: table-cell;
+	vertical-align:middle;
+}
+
+.inline-outer {
+	display:table;
+}
+
 .attachment {
 	background-position: center;
 	background-repeat: no-repeat;
@@ -25,9 +34,9 @@
 .thumb {
 	background-position: center;
 	background-repeat: no-repeat;
-	background-size: contain;
-	height: 150px;
-	width: 150px;
+	background-size: cover;
+	height: 90px;
+	width: 90px;
 	border-radius:50%;
 	display:inline-block;
 	margin:10px 10px 10px 10px;

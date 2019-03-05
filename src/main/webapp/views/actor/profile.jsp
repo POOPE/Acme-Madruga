@@ -25,26 +25,49 @@
 	<div>
 		<jstl:if test="${photos != null}">
 			<jstl:forEach items="${photos}" var="url">
-				<div class="attachment" style="background-image:url('${url}')"></div>		
+				<div class="thumb" style="background-image:url(${url})"></div>
 			</jstl:forEach>
 		</jstl:if>
 		<jstl:if test="${photos == null}">
-			<span style="color:grey;"><spring:message code="profile.nodisplay"/></span>
+			<span style="color: grey;"><spring:message
+					code="profile.nodisplay" /></span>
 		</jstl:if>
 	</div>
 	<div>
-		<h3><jstl:out value="${actor.title}"/></h3>
-		<span style="color:grey;">Est. <fmt:formatDate value="${actor.estDate}" pattern="dd/MM/yyyy" /></span>
+		<h3>
+			<jstl:out value="${actor.title}" />
+		</h3>
+		<span style="color: grey;">Est. <fmt:formatDate
+				value="${actor.estDate}" pattern="dd/MM/yyyy" /></span>
 	</div>
 </security:authorize>
-<div class="box">
-	<div>
-		<div class="attachment" style="background-image:url('${actor.photo}')" ></div>
-		<b><jstl:out value="${actor.name}"/>&nbsp;<jstl:if test="${actor.middleName != null}"><jstl:out value="${actor.middleName}"></jstl:out>&nbsp;</jstl:if><jstl:out value="${actor.surname}"/></b>
+<div>
+	<div class="inline-outer">
+		<div class="thumb inline" style="background-image:url('${actor.photo}')"></div>
+		<div class="inline">
+			<b><jstl:out value="${actor.name}" />&nbsp;<jstl:if
+					test="${actor.middleName != null}">
+					<jstl:out value="${actor.middleName}"></jstl:out>&nbsp;</jstl:if> <jstl:out
+					value="${actor.surname}" /></b>
+		</div>
 	</div>
 	<div>
-		
+		<i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;
+		<jstl:out value="${actor.email}"/>
+	</div>
+	<div>
+		<i class="fa fa-phone" aria-hidden="true"></i>&nbsp;
+		<jstl:if test="${actor.countryCode!=null && actor.phoneNumber!=''}">+<jstl:out value="${actor.countryCode}"/></jstl:if>
+		<jstl:if test="${actor.areaCode!=null && actor.areaCode!=''}">(<jstl:out value="${actor.areaCode}"/>)</jstl:if>
+		<jstl:if test="${actor.phoneNumber!=null && actor.phoneNumber!=''}"><jstl:out value="${actor.phoneNumber}"/></jstl:if>
+	</div>
+	<div>
+		<i class="fa fa-home" aria-hidden="true"></i>&nbsp;
+		<jstl:out value="${actor.address}"/>
 	</div>
 </div>
-<div></div>
+<br/>
+<div>
+	<a href=""><spring:message code="edit"/></a>
+</div>
 

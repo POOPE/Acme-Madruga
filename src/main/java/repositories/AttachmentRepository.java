@@ -21,7 +21,7 @@ import domain.Attachment;
 @Repository
 public interface AttachmentRepository extends JpaRepository<Attachment, Integer> {
 
-	@Query("select a from Attachment a where a.owner=?1")
+	@Query("select a from Attachment a where a.owner.id=?1")
 	ArrayList<Attachment> findByOwner(int ownerId);
 
 }
