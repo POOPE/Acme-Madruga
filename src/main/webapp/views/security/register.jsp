@@ -56,10 +56,9 @@
 			<spring:message code="actor.phonenumber" />
 			<input type="text" placeholder="+XX (XX) XXXX" id="phoneinput" />
 		</div>
-		<acme:textbox code="actor.address" path="address" />
 	</div>
 
-	<div class="box hidden" id="brotherhood-info">
+	<div class="box" id="brotherhood-info">
 		<div>
 			<b><spring:message code="actor.brotherhood" /></b>
 		</div>
