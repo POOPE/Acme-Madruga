@@ -12,11 +12,11 @@ addButton.addEventListener("click", function(event) {
 });
 
 function reloadAttachment() {
-	var attachments = hiddenAttachments.value.split(",");
-	for ( var i = 0; i < attachments.length; i++) {
+	var attachmentvalues = hiddenAttachments.value.split(",");
+	for ( var i = 0; i < attachmentvalues.length; i++) {
 		var container = document.createElement("div");
 		container.className = "attachment";
-		container.style.backgroundImage = "url('" + attachments[i] + "')";
+		container.style.backgroundImage = "url('" + attachmentvalues[i] + "')";
 		container.setAttribute("onclick", "removeAttachment(this);");
 		attachments.appendChild(container);
 	}

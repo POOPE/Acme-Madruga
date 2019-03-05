@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import repositories.BrotherhoodRepository;
 import domain.Brotherhood;
 import forms.RegisterForm;
+import domain.Attachment;
 
 @Service
 @Transactional
@@ -48,10 +49,9 @@ public class BrotherhoodService {
 		if (registerForm.getPhotos() != null && registerForm.getPhotos() != "") {
 			final String[] photos = registerForm.getPhotos().split(",");
 			for (int i = 0; i < photos.length; i++)
-				this.attachmentService.create(saved, photos[i]);
+				Attachment attachment = this.attachmentService.create(saved, photos[i]);
 		}
 	}
-
 	public Brotherhood save(final Brotherhood brotherhood) {
 		return this.brotherhoodRepo.save(brotherhood);
 

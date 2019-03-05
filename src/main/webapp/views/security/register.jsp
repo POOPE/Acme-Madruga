@@ -81,5 +81,5 @@
 
 <script type="text/javascript" src="scripts/password.js"></script>
 <script type="text/javascript" src="scripts/phonenum.js"></script>
-<script type="text/javascript" src="scripts/photos.js"></script>
+<script type="text/javascript" src="scripts/attachments.js"></script>
 <script type="text/javascript" src="scripts/register.js"></script>
