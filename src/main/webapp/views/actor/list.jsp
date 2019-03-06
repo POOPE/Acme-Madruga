@@ -22,12 +22,16 @@
 <!-- Listing grid -->
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="actors" requestURI="actor/administrator/list.do" id="row">
+	name="actors" requestURI="${URI}" id="row">
 	
 	<!-- Attributes -->
 
 	<spring:message code="actor.name" var="nameHeader" />
-	<display:column property="name" title="${nameHeader}" sortable="true" />
+	<display:column  title="${nameHeader}" sortable="true" >
+		<a href="">
+			<jstl:out value="${row.name +' '+ row.surname}"/>
+		</a>
+	</display:column>
 
 	<spring:message code="actor.email" var="emailHeader" />
 	<display:column property="email" title="${emailHeader}" sortable="true" />

@@ -23,6 +23,7 @@
 		<value>/views/position/tiles.xml</value>
 		<value>/views/bfloat/tiles.xml</value>
 		<value>/views/procession/tiles.xml</value>
+		<value>/views/log/tiles.xml</value>
 	</util:list>
 
 </beans>

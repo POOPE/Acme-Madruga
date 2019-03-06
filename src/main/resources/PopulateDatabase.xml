@@ -199,7 +199,7 @@
 		<property name="broder" ref="brother1" />
 		<property name="position" ref="position2" />
 		<property name="moment" value="03/11/2017 20:32" />
-		<property name="status" value="PENDING" />
+		<property name="status" value="ACCEPTED" />
 	</bean>
 
 	<bean id="enrollment2" class="domain.Enrollment">
@@ -209,6 +209,15 @@
 		<property name="position" ref="position1" />
 		<property name="moment" value="03/11/2017 20:32" />
 		<property name="status" value="PENDING" />
+	</bean>
+	
+	<!-- enrollment logs -->
+
+	<bean id="log1" class="domain.EnrollmentLog">
+		<property name="member" ref="member1" />
+		<property name="brotherhood" ref="brother1" />
+		<property name="action" value="JOINS" />
+		<property name="moment" value="03/15/2017 04:20"/>
 	</bean>
 
 	<!-- site config -->
