@@ -28,6 +28,16 @@
 	display:table;
 }
 
+.attachment-150 {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	height: 150px;
+	width: 150px;
+	display:inline-block;
+	margin:10px 10px 10px 10px;
+}
+
 .attachment {
 	background-position: center;
 	background-repeat: no-repeat;

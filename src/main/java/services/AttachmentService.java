@@ -22,24 +22,21 @@ public class AttachmentService {
 
 
 	public Attachment createForPrincipal(final String URL) {
-		final Attachment res = new Attachment();
-		res.setOwner(this.actorService.findPrincipal());
-		res.setURL(URL);
-		return res;
+		return this.create(this.actorService.findPrincipal(), URL);
 	}
 
-	public Attachment create(Actor actor, String URL) {
+	public Attachment create(final Actor actor, final String URL) {
 		final Attachment res = new Attachment();
 		res.setOwner(actor);
 		res.setURL(URL);
 		return this.save(res);
 	}
 
-	public ArrayList<Attachment> findByOwner(Actor owner) {
+	public ArrayList<Attachment> findByOwner(final Actor owner) {
 		return this.attachmentRepository.findByOwner(owner.getId());
 	}
 
-	public Attachment save(Attachment attachment) {
+	public Attachment save(final Attachment attachment) {
 		return this.attachmentRepository.save(attachment);
 	}
 }

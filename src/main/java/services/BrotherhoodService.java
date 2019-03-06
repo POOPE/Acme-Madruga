@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import repositories.BrotherhoodRepository;
+import domain.Actor;
 import domain.Brotherhood;
 import forms.RegisterForm;
 
@@ -29,7 +30,7 @@ public class BrotherhoodService {
 		return (Brotherhood) this.actorService.findPrincipal();
 	}
 
-	public void register(RegisterForm registerForm) {
+	public void register(final RegisterForm registerForm) {
 		Brotherhood brotherhood = new Brotherhood();
 		brotherhood = (Brotherhood) this.actorService.initialize(brotherhood, registerForm.getRole());
 
@@ -48,13 +49,12 @@ public class BrotherhoodService {
 		brotherhood.setSurname(registerForm.getLastName());
 		brotherhood.setTitle(registerForm.getTitle());
 		brotherhood.setEstDate(new Date());
-		final Brotherhood saved = this.save(brotherhood);
+		final Actor saved = this.save(brotherhood);
 
 		if (registerForm.getPhotos() != null && registerForm.getPhotos() != "") {
-			String[] photos = registerForm.getPhotos().split(",");
-			for (int i = 0; i < photos.length; i++) {
+			final String[] photos = registerForm.getPhotos().split(",");
+			for (int i = 0; i < photos.length; i++)
 				this.attachmentService.create(saved, photos[i]);
-			}
 
 		}
 	}

@@ -16,8 +16,7 @@ public class Attachment extends DomainEntity {
 	private String	URL;
 
 
-	@NotBlank
-	@ManyToOne
+	@ManyToOne(optional = false)
 	public Actor getOwner() {
 		return this.owner;
 	}

@@ -13,14 +13,16 @@ addButton.addEventListener("click", function(event) {
 
 function reloadAttachment() {
 	var attachmentvalues = hiddenAttachments.value.split(",");
-	for ( var i = 0; i < attachmentvalues.length; i++) {
-		var container = document.createElement("div");
-		container.className = "attachment";
-		container.style.backgroundImage = "url('" + attachmentvalues[i] + "')";
-		container.setAttribute("onclick", "removeAttachment(this);");
-		attachments.appendChild(container);
+	if (attachmentvalues[0] != "") {
+		for ( var i = 0; i < attachmentvalues.length; i++) {
+			var container = document.createElement("div");
+			container.className = "attachment";
+			container.style.backgroundImage = "url('" + attachmentvalues[i] + "')";
+			container.setAttribute("onclick", "removeAttachment(this);");
+			attachments.appendChild(container);
+		}
+		updateAttachment();
 	}
-	updateAttachment();
 }
 
 function addAttachment() {

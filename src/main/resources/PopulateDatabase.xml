@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 
- * PopulateDatabase.xml
- *
- * Copyright (C) 2019 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- -->
+<!-- * PopulateDatabase.xml * * Copyright (C) 2019 Universidad de Sevilla 
+	* * The use of this project is hereby constrained to the conditions of the 
+	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	">
-	
+
 	<!-- User accounts -->
 
 	<bean id="userAccount1" class="security.UserAccount">
@@ -29,7 +23,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount2" class="security.UserAccount">
 		<property name="username" value="member1" />
 		<property name="password" value="325a2cc052914ceeb8c19016c091d2ac" />
@@ -40,8 +34,8 @@
 				</bean>
 			</list>
 		</property>
-	</bean>	
-	
+	</bean>
+
 	<bean id="userAccount3" class="security.UserAccount">
 		<property name="username" value="member2" />
 		<property name="password" value="325a2cc052914ceeb8c19016c091d2ac" />
@@ -53,7 +47,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount4" class="security.UserAccount">
 		<property name="username" value="member3" />
 		<property name="password" value="325a2cc052914ceeb8c19016c091d2ac" />
@@ -65,7 +59,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount5" class="security.UserAccount">
 		<property name="username" value="brother1" />
 		<property name="password" value="325a2cc052914ceeb8c19016c091d2ac" />
@@ -77,7 +71,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount6" class="security.UserAccount">
 		<property name="username" value="brother2" />
 		<property name="password" value="325a2cc052914ceeb8c19016c091d2ac" />
@@ -89,9 +83,9 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<!-- Administrators -->
-	
+
 	<bean id="admin1" class="domain.Administrator">
 		<property name="name" value="Ad" />
 		<property name="middleName" value="min" />
@@ -101,12 +95,13 @@
 		<property name="areaCode" value="" />
 		<property name="phoneNumber" value="666666666" />
 		<property name="address" value="Admin address 1" />
-		<property name="photo" value="https://www.bewelcome.org/members/avatar/doge?500"/>
-		<property name="userAccount" ref="userAccount1" />		
+		<property name="photo"
+			value="https://www.bewelcome.org/members/avatar/doge?500" />
+		<property name="userAccount" ref="userAccount1" />
 	</bean>
-		
+
 	<!-- members -->
-	
+
 	<bean id="member1" class="domain.Member">
 		<property name="name" value="Mem" />
 		<property name="middleName" value="ber" />
@@ -116,10 +111,11 @@
 		<property name="areaCode" value="" />
 		<property name="phoneNumber" value="666666666" />
 		<property name="address" value="Address 1" />
-		<property name="photo" value="https://www.bewelcome.org/members/avatar/doge?500"/>
-		<property name="userAccount" ref="userAccount2" />		
+		<property name="photo"
+			value="https://www.bewelcome.org/members/avatar/doge?500" />
+		<property name="userAccount" ref="userAccount2" />
 	</bean>
-	
+
 	<bean id="member2" class="domain.Member">
 		<property name="name" value="Mem" />
 		<property name="middleName" value="ber" />
@@ -129,10 +125,11 @@
 		<property name="areaCode" value="" />
 		<property name="phoneNumber" value="666666666" />
 		<property name="address" value="Address 2" />
-		<property name="photo" value="https://www.bewelcome.org/members/avatar/doge?500"/>
-		<property name="userAccount" ref="userAccount3" />		
+		<property name="photo"
+			value="https://www.bewelcome.org/members/avatar/doge?500" />
+		<property name="userAccount" ref="userAccount3" />
 	</bean>
-	
+
 	<bean id="member3" class="domain.Member">
 		<property name="name" value="Mem" />
 		<property name="middleName" value="ber" />
@@ -142,12 +139,13 @@
 		<property name="areaCode" value="" />
 		<property name="phoneNumber" value="666666666" />
 		<property name="address" value="Address 3" />
-		<property name="photo" value="https://www.bewelcome.org/members/avatar/doge?500"/>
-		<property name="userAccount" ref="userAccount4" />		
+		<property name="photo"
+			value="https://www.bewelcome.org/members/avatar/doge?500" />
+		<property name="userAccount" ref="userAccount4" />
 	</bean>
-	
-	<!-- Reviewers -->
-	
+
+	<!-- BROTHERHOOD -->
+
 	<bean id="brother1" class="domain.Brotherhood">
 		<property name="name" value="Brother" />
 		<property name="middleName" value="hood" />
@@ -157,12 +155,13 @@
 		<property name="areaCode" value="" />
 		<property name="phoneNumber" value="666666666" />
 		<property name="address" value="Address 3" />
-		<property name="photo" value="https://www.bewelcome.org/members/avatar/doge?500"/>
-		<property name="userAccount" ref="userAccount5" />	
-		<property name="title" value="EL GRAN PODEH"/>
-		<property name="estDate" value="3/11/2017 20:32"/>			
+		<property name="photo"
+			value="https://www.bewelcome.org/members/avatar/doge?500" />
+		<property name="userAccount" ref="userAccount5" />
+		<property name="title" value="EL GRAN PODEH" />
+		<property name="estDate" value="3/11/2017 20:32" />
 	</bean>
-	
+
 	<bean id="brother2" class="domain.Brotherhood">
 		<property name="name" value="Brother" />
 		<property name="middleName" value="hood" />
@@ -172,69 +171,82 @@
 		<property name="areaCode" value="" />
 		<property name="phoneNumber" value="666666666" />
 		<property name="address" value="Address 33" />
-		<property name="photo" value="https://www.bewelcome.org/members/avatar/doge?500"/>
-		<property name="userAccount" ref="userAccount6" />	
-		<property name="title" value="LA BORRICA"/>
-		<property name="estDate" value="4/11/2017 20:32"/>		
-	</bean>	
+		<property name="photo"
+			value="https://www.bewelcome.org/members/avatar/doge?500" />
+		<property name="userAccount" ref="userAccount6" />
+		<property name="title" value="LA BORRICA" />
+		<property name="estDate" value="4/11/2017 20:32" />
+	</bean>
+
+	<!-- attachments -->
+
+	<bean id="attachment1" class="domain.Attachment">
+		<property name="owner" ref="brother1" />
+		<property name="URL" value="https://i.kym-cdn.com/photos/images/newsfeed/000/674/934/422.jpg" />
+	</bean>
 	
-	
+	<bean id="attachment2" class="domain.Attachment">
+		<property name="owner" ref="brother1" />
+		<property name="URL" value="https://i.kym-cdn.com/photos/images/newsfeed/000/674/934/422.jpg" />
+	</bean>
+
+
 	<!-- Enrollment -->
-	
+
 	<bean id="enrollment1" class="domain.Enrollment">
-		
+
 		<property name="member" ref="member1" />
-		<property name="broder" ref="brother1" />	
-		<property name="position" value="Presidente"/>
-		<property name="moment" value="03/11/2017 20:32"/>	
-		<property name="status" value="PENDING"/>		
+		<property name="broder" ref="brother1" />
+		<property name="position" value="Presidente" />
+		<property name="moment" value="03/11/2017 20:32" />
+		<property name="status" value="PENDING" />
 	</bean>
-	
+
 	<bean id="enrollment2" class="domain.Enrollment">
-		
+
 		<property name="member" ref="member2" />
-		<property name="broder" ref="brother2" />	
-		<property name="position" value="Promotor"/>
-		<property name="moment" value="03/11/2017 20:32"/>
-		<property name="status" value="PENDING"/>		
+		<property name="broder" ref="brother2" />
+		<property name="position" value="Promotor" />
+		<property name="moment" value="03/11/2017 20:32" />
+		<property name="status" value="PENDING" />
 	</bean>
-	
+
 	<!-- site config -->
-	
+
 	<bean id="siteConfig" class="domain.SiteConfig">
 		<property name="siteName" value="Acme Madruga" />
 		<property name="bannerUrl" value=" https://tinyurl.com/acme-madruga" />
 		<property name="welcomeMessage" value="Welcome vro..." />
 		<property name="countryCode" value="34" />
 	</bean>
-	
+
 	<!-- position -->
 	<bean id="position1" class="domain.Position">
 		<property name="title" value="President" />
 	</bean>
-	
+
 	<bean id="position2" class="domain.Position">
 		<property name="title" value="Vice President" />
 	</bean>
-	
+
 	<bean id="position3" class="domain.Position">
 		<property name="title" value="Secretary" />
 	</bean>
-	
+
 	<bean id="position4" class="domain.Position">
 		<property name="title" value="Treasurer" />
 	</bean>
-	
+
 	<bean id="position5" class="domain.Position">
 		<property name="title" value="Historian" />
 	</bean>
-	
+
 	<bean id="position6" class="domain.Position">
 		<property name="title" value="Fundraiser" />
 	</bean>
-	
+
 	<bean id="position7" class="domain.Position">
 		<property name="title" value="Officer" />
 	</bean>
-	
+
 </beans>

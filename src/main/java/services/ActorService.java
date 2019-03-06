@@ -120,47 +120,39 @@ public class ActorService {
 			break;
 		case "BROTHERHOOD":
 			this.brotherhoodService.register(registerForm);
+			System.out.println("GO THIS FAR");
 			break;
 		}
 	}
 
-	public Actor edit(ActorForm actorForm) {
+	public Actor edit(final ActorForm actorForm) {
 		return this.edit(this.findPrincipal(), actorForm);
 	}
 
-	public Actor edit(Actor actor, ActorForm actorForm) {
-		if (actorForm.getAddress() != null) {
+	public Actor edit(final Actor actor, final ActorForm actorForm) {
+		if (actorForm.getAddress() != null)
 			actor.setAddress(actorForm.getAddress());
-		}
-		if (actorForm.getAreaCode() != null) {
+		if (actorForm.getAreaCode() != null)
 			actor.setAreaCode(actorForm.getAreaCode());
-		}
-		if (actorForm.getCountryCode() != null) {
+		if (actorForm.getCountryCode() != null)
 			actor.setCountryCode(actorForm.getCountryCode());
-		}
-		if (actorForm.getPhoneNumber() != null) {
+		if (actorForm.getPhoneNumber() != null)
 			actor.setPhoneNumber(actorForm.getPhoneNumber());
-		}
-		if (actorForm.getEmail() != null) {
+		if (actorForm.getEmail() != null)
 			actor.setEmail(actorForm.getEmail());
-		}
-		if (actorForm.getFirstName() != null) {
+		if (actorForm.getFirstName() != null)
 			actor.setName(actorForm.getFirstName());
-		}
-		if (actorForm.getMiddleName() != null) {
+		if (actorForm.getMiddleName() != null)
 			actor.setMiddleName(actorForm.getMiddleName());
-		}
-		if (actorForm.getLastName() != null) {
+		if (actorForm.getLastName() != null)
 			actor.setSurname(actorForm.getLastName());
-		}
-		if (actorForm.getPhoto() != null) {
+		if (actorForm.getPhoto() != null)
 			actor.setPhoto(actorForm.getPhoto());
-		}
 		return this.save(actor);
 	}
 
-	public ActorForm generateForm(Actor actor) {
-		ActorForm res = new ActorForm();
+	public ActorForm generateForm(final Actor actor) {
+		final ActorForm res = new ActorForm();
 		res.setAddress(actor.getAddress());
 		res.setAreaCode(actor.getAreaCode());
 		res.setCountryCode(actor.getCountryCode());

@@ -25,8 +25,8 @@
 	<div>
 		<jstl:if test="${photos != null}">
 			<div class="inline-outer">
-				<jstl:forEach items="${photos}" var="url">
-					<div class="inline thumb" style="background-image:url(${url})"></div>
+				<jstl:forEach items="${photos}" var="attachment">
+					<div class="inline attachment-150" style="background-image:url('${attachment.URL}')"></div>
 				</jstl:forEach>
 			</div>
 		</jstl:if>
@@ -38,15 +38,15 @@
 	<div>
 		<h3>
 			<jstl:out value="${actor.title}" />
-			<i id="edittitle" class="fa fa-pencil" aria-hidden="true"></i>
+<!-- 			<i id="edittitle" class="fa fa-pencil" aria-hidden="true"></i> -->
 		</h3>
-		<form action="brotherhood/title.do" method="get" id="titleform">
-			<div>
-				<spring:message code="actor.title" />
-				: <input type="text" name="title"> <input type="submit"
-					value="<spring:message code="save"/>">
-			</div>
-		</form>
+<%-- 		<form action="brotherhood/title.do" method="get" id="titleform"> --%>
+<!-- 			<div> -->
+<%-- 				<spring:message code="actor.title" /> --%>
+<!-- 				: <input type="text" name="title"> <input type="submit" -->
+<%-- 					value="<spring:message code="save"/>"> --%>
+<!-- 			</div> -->
+<%-- 		</form> --%>
 		<jstl:if test="${message}">
 			<div>
 				<spring:message code="${message}" />
