@@ -197,7 +197,7 @@
 
 		<property name="member" ref="member1" />
 		<property name="broder" ref="brother1" />
-		<property name="position" value="Presidente" />
+		<property name="position" ref="position2" />
 		<property name="moment" value="03/11/2017 20:32" />
 		<property name="status" value="PENDING" />
 	</bean>
@@ -206,7 +206,7 @@
 
 		<property name="member" ref="member2" />
 		<property name="broder" ref="brother2" />
-		<property name="position" value="Promotor" />
+		<property name="position" ref="position1" />
 		<property name="moment" value="03/11/2017 20:32" />
 		<property name="status" value="PENDING" />
 	</bean>
