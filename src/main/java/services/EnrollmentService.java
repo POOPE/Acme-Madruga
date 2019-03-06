@@ -1,11 +1,16 @@
 
 package services;
 
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import domain.Brotherhood;
 import domain.Enrollment;
+import domain.Member;
 import repositories.EnrollmentRepository;
 
 @Service
@@ -15,41 +20,73 @@ public class EnrollmentService {
 	@Autowired
 	private EnrollmentRepository	enrollmentRepository;
 	@Autowired
-	private ActorService			actorService;
+	private MemberService			memberService;
 
 
-	public Enrollment create() {
+	public Enrollment create(final Brotherhood b) {
+
 		final Enrollment w = new Enrollment();
-		w.setMemberIn(false);
+
+		final Member member = this.memberService.findPrincipal();
+
+		w.setMember(member);
+		w.setBroder(b);
+		w.setMoment(new Date());
+
+		w.setStatus(Enrollment.PENDING);
+
 		return w;
 	}
 
-	public Enrollment save(Enrollment w) {
-		if (w.getId() == 0)
-			w = this.initialize(w);
-		return this.warrantyRepository.save(w);
+	public Enrollment save(final Enrollment w) {
+		if (w.getId() == 0) {
+
+			w.setMoment(new Date());
+
+			w.setStatus(Enrollment.PENDING);
+		}
+		return this.enrollmentRepository.save(w);
 	}
 
-	public Enrollment findById(final int id) {
-		return this.warrantyRepository.findOne(id);
+	public Enrollment findById(final int enrollmentId) {
+		return this.enrollmentRepository.findOne(enrollmentId);
+	}
+
+	public List<Enrollment> findByAuthor(final Member member) {
+		return this.enrollmentRepository.findByAuthor(member.getId());
 	}
 
 	public List<Enrollment> findAll() {
-		return this.warrantyRepository.findAll();
+		return this.enrollmentRepository.findAll();
 	}
 
-	public void delete(final Enrollment w) {
+	public Enrollment acceptEnrollment(final Enrollment e) {
 
-		this.warrantyRepository.delete(w.getId());
+		e.setMoment(new Date());
+		e.setStatus(Enrollment.ACCEPTED);
+		//y el position?
+		return e;
 	}
 
-	public Enrollment initialize(final Enrollment warranty) {
-		warranty.setLocked(false);
-		return warranty;
+	public Enrollment rejectEnrollment(final Enrollment e) {
+
+		e.setMoment(new Date());
+		e.setStatus(Enrollment.DENIED);
+		//crear nueva entrada en el historial
+		return e;
 	}
 
-	public List<Enrollment> findAllFinal() {
-		return this.warrantyRepository.findAllFinal();
+	public Boolean deleteEnrollment(final Enrollment e) {
+
+		Boolean res = true;
+		this.enrollmentRepository.delete(e);
+
+		//crear nueva entrada en el historial
+
+		if (this.enrollmentRepository.findOne(e.getId()) != null)
+			res = false;
+
+		return res;
 	}
 
 }
