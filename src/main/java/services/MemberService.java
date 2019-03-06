@@ -20,6 +20,11 @@ public class MemberService {
 	private ActorService		actorService;
 
 
+	public Member findPrincipal() {
+		this.actorService.assertPrincipalAuthority("MEMBER");
+		return (Member) this.actorService.findPrincipal();
+	}
+
 	public void register(final RegisterForm registerForm) {
 		Member member = new Member();
 		member = (Member) this.actorService.initialize(member, registerForm.getRole());

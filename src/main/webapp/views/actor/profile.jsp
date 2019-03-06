@@ -76,6 +76,6 @@
 </div>
 <br />
 <div>
-	<a href=""><spring:message code="edit" /></a>
+	<a href="actor/edit.do"><spring:message code="edit" /></a>
 </div>
 
