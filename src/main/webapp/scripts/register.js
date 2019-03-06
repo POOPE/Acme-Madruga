@@ -8,3 +8,7 @@ function checkBrotherhood() {
 		brotherhoodInfo.style.display = "none";
 	}
 }
+
+$(document).ready(function() {
+	checkBrotherhood();
+});

@@ -29,9 +29,7 @@
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="actor/administrator/list.do"><spring:message code="master.page.administrator.actors" /></a></li>
-					<li><a href="announcement/administrator/list.do"><spring:message code="master.page.administrator.announcements" /></a></li>
-					<li><a href="certification/administrator/list.do"><spring:message code="master.page.administrator.certifications" /></a></li>
+					<li><a href="config/admin/edit.do"><spring:message code="master.page.admin.config" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>		

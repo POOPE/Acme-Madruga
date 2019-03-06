@@ -24,6 +24,7 @@ import security.LoginService;
 import security.UserAccount;
 import security.UserAccountService;
 import domain.Actor;
+import forms.ActorForm;
 import forms.RegisterForm;
 
 @Service
@@ -45,6 +46,8 @@ public class ActorService {
 	private AdminService		adminService;
 	@Autowired
 	private BrotherhoodService	brotherhoodService;
+	@Autowired
+	private LoginService		loginService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -120,6 +123,56 @@ public class ActorService {
 			break;
 		}
 	}
+
+	public Actor edit(ActorForm actorForm) {
+		return this.edit(this.findPrincipal(), actorForm);
+	}
+
+	public Actor edit(Actor actor, ActorForm actorForm) {
+		if (actorForm.getAddress() != null) {
+			actor.setAddress(actorForm.getAddress());
+		}
+		if (actorForm.getAreaCode() != null) {
+			actor.setAreaCode(actorForm.getAreaCode());
+		}
+		if (actorForm.getCountryCode() != null) {
+			actor.setCountryCode(actorForm.getCountryCode());
+		}
+		if (actorForm.getPhoneNumber() != null) {
+			actor.setPhoneNumber(actorForm.getPhoneNumber());
+		}
+		if (actorForm.getEmail() != null) {
+			actor.setEmail(actorForm.getEmail());
+		}
+		if (actorForm.getFirstName() != null) {
+			actor.setName(actorForm.getFirstName());
+		}
+		if (actorForm.getMiddleName() != null) {
+			actor.setMiddleName(actorForm.getMiddleName());
+		}
+		if (actorForm.getLastName() != null) {
+			actor.setSurname(actorForm.getLastName());
+		}
+		if (actorForm.getPhoto() != null) {
+			actor.setPhoto(actorForm.getPhoto());
+		}
+		return this.save(actor);
+	}
+
+	public ActorForm generateForm(Actor actor) {
+		ActorForm res = new ActorForm();
+		res.setAddress(actor.getAddress());
+		res.setAreaCode(actor.getAreaCode());
+		res.setCountryCode(actor.getCountryCode());
+		res.setEmail(actor.getEmail());
+		res.setFirstName(actor.getName());
+		res.setLastName(actor.getSurname());
+		res.setMiddleName(actor.getMiddleName());
+		res.setPhoneNumber(actor.getPhoneNumber());
+		res.setPhoto(actor.getPhoto());
+		return res;
+	}
+
 	public Actor initialize(final Actor actor, final String authority) {
 		actor.setPhoto("https://www.qualiscare.com/wp-content/uploads/2017/08/default-user-300x300.png");
 		actor.setUserAccount(this.userAccountService.createUserAccount(authority));

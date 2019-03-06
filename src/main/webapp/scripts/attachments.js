@@ -4,10 +4,24 @@ var attachmentAdd = document.getElementById("attachment-add");
 var attachments = document.getElementById("attachments");
 var addButton = document.getElementById("attachment-add");
 
+// test
+
 addButton.setAttribute("onclick", "addAttachment();");
 addButton.addEventListener("click", function(event) {
 	event.preventDefault();
 });
+
+function reloadAttachment() {
+	var attachmentvalues = hiddenAttachments.value.split(",");
+	for ( var i = 0; i < attachmentvalues.length; i++) {
+		var container = document.createElement("div");
+		container.className = "attachment";
+		container.style.backgroundImage = "url('" + attachmentvalues[i] + "')";
+		container.setAttribute("onclick", "removeAttachment(this);");
+		attachments.appendChild(container);
+	}
+	updateAttachment();
+}
 
 function addAttachment() {
 	var url = attachmentInput.value;
@@ -38,3 +52,7 @@ function removeAttachment(div) {
 	div.remove();
 	updateAttachment();
 }
+
+$(document).ready(function() {
+	reloadAttachment();
+});

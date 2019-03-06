@@ -21,6 +21,7 @@ import services.MemberService;
 import domain.Actor;
 import domain.Attachment;
 import domain.Brotherhood;
+import forms.ActorForm;
 import forms.RegisterForm;
 
 @Controller
@@ -77,6 +78,30 @@ public class ActorController {
 			res.addObject("actor", actor);
 		return res;
 	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit() {
+		ModelAndView res;
+		ActorForm actorForm = this.actorService.generateForm(this.actorService.findPrincipal());
+		res = this.createActorEditModelAndView(actorForm);
+		return res;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST)
+	public ModelAndView commit(@ModelAttribute("actorForm") @Valid final ActorForm actorForm, final BindingResult binding) {
+		ModelAndView res;
+		if (binding.hasErrors())
+			res = this.createActorEditModelAndView(actorForm);
+		else
+			try {
+				this.actorService.edit(actorForm);
+				res = new ModelAndView("redirect:profile.do");
+			} catch (final Exception e) {
+				res = this.createActorEditModelAndView(actorForm, "actor.commit.error");
+			}
+		return res;
+	}
+
 	//AUX
 	protected ModelAndView createEditModelAndView(final RegisterForm registerForm) {
 		return this.createEditModelAndView(registerForm, null);
@@ -91,6 +116,19 @@ public class ActorController {
 		result = new ModelAndView("security/register");
 		result.addObject("regForm", registerForm);
 		result.addObject("roles", roles);
+		result.addObject("message", messageCode);
+		return result;
+	}
+
+	protected ModelAndView createActorEditModelAndView(ActorForm actorForm) {
+		return this.createActorEditModelAndView(actorForm, null);
+	}
+
+	protected ModelAndView createActorEditModelAndView(ActorForm actorForm, final String messageCode) {
+		ModelAndView result;
+
+		result = new ModelAndView("actor/edit");
+		result.addObject("actorForm", actorForm);
 		result.addObject("message", messageCode);
 		return result;
 	}

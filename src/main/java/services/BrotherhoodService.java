@@ -24,7 +24,12 @@ public class BrotherhoodService {
 	private AttachmentService		attachmentService;
 
 
-	public void register(final RegisterForm registerForm) {
+	public Brotherhood findPrincipal() {
+		this.actorService.assertPrincipalAuthority("BROTHERHOOD");
+		return (Brotherhood) this.actorService.findPrincipal();
+	}
+
+	public void register(RegisterForm registerForm) {
 		Brotherhood brotherhood = new Brotherhood();
 		brotherhood = (Brotherhood) this.actorService.initialize(brotherhood, registerForm.getRole());
 
@@ -46,12 +51,13 @@ public class BrotherhoodService {
 		final Brotherhood saved = this.save(brotherhood);
 
 		if (registerForm.getPhotos() != null && registerForm.getPhotos() != "") {
-			final String[] photos = registerForm.getPhotos().split(",");
-			for (int i = 0; i < photos.length; i++)
+			String[] photos = registerForm.getPhotos().split(",");
+			for (int i = 0; i < photos.length; i++) {
 				this.attachmentService.create(saved, photos[i]);
+			}
+
 		}
 	}
-
 	public Brotherhood save(final Brotherhood brotherhood) {
 		return this.brotherhoodRepo.save(brotherhood);
 

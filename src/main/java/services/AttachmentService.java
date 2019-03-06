@@ -28,18 +28,18 @@ public class AttachmentService {
 		return res;
 	}
 
-	public Attachment create(final Actor actor, final String URL) {
+	public Attachment create(Actor actor, String URL) {
 		final Attachment res = new Attachment();
 		res.setOwner(actor);
 		res.setURL(URL);
 		return this.save(res);
 	}
 
-	public ArrayList<Attachment> findByOwner(final Actor owner) {
+	public ArrayList<Attachment> findByOwner(Actor owner) {
 		return this.attachmentRepository.findByOwner(owner.getId());
 	}
 
-	public Attachment save(final Attachment attachment) {
+	public Attachment save(Attachment attachment) {
 		return this.attachmentRepository.save(attachment);
 	}
 }

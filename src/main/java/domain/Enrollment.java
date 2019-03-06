@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -18,13 +19,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Access(AccessType.PROPERTY)
 public class Enrollment extends DomainEntity {
 
-	private String		position;
-	private Date		moment;
-	private Boolean		memberIn;
-	private Date		dropIn;
+	private String				position;
+	private Date				moment;
+	private String				status;
 
-	private Member		member;
-	private Brotherhood	broder;
+	private Member				member;
+	private Brotherhood			broder;
+
+	public static final String	PENDING		= "PENDING";
+	public static final String	ACCEPTED	= "ACCEPTED";
+	public static final String	DENIED		= "DENIED";
 
 
 	@NotBlank
@@ -47,20 +51,13 @@ public class Enrollment extends DomainEntity {
 		this.moment = moment;
 	}
 
-	public Boolean getMemberIn() {
-		return this.memberIn;
+	@Pattern(regexp = "^" + Enrollment.PENDING + "|" + Enrollment.ACCEPTED + "|" + Enrollment.DENIED + "$")
+	public String getStatus() {
+		return this.status;
 	}
 
-	public void setMemberIn(final Boolean memberIn) {
-		this.memberIn = memberIn;
-	}
-
-	public Date getDropIn() {
-		return this.dropIn;
-	}
-
-	public void setDropIn(final Date dropIn) {
-		this.dropIn = dropIn;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	// Relationships ----------------------------------------------------------

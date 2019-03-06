@@ -19,9 +19,7 @@
 		<value>/views/welcome/tiles.xml</value>		
 
 		<value>/views/actor/tiles.xml</value>
-		<value>/views/announcement/tiles.xml</value>
-		<value>/views/certification/tiles.xml</value>		
-		<value>/views/exam/tiles.xml</value>		
+		<value>/views/config/tiles.xml</value>
 	</util:list>
 
 </beans>
