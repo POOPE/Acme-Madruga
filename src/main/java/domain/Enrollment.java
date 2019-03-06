@@ -19,7 +19,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Access(AccessType.PROPERTY)
 public class Enrollment extends DomainEntity {
 
-	private String				position;
+	private Position			position;
 	private Date				moment;
 	private String				status;
 
@@ -32,11 +32,11 @@ public class Enrollment extends DomainEntity {
 
 
 	@NotBlank
-	public String getPosition() {
+	public Position getPosition() {
 		return this.position;
 	}
 
-	public void setPosition(final String position) {
+	public void setPosition(final Position position) {
 		this.position = position;
 	}
 
@@ -56,7 +56,7 @@ public class Enrollment extends DomainEntity {
 		return this.status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(final String status) {
 		this.status = status;
 	}
 
