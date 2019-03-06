@@ -5,11 +5,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import domain.SiteConfig;
+import domain.Position;
 
 @Repository
-public interface SiteConfigurationRepository extends JpaRepository<SiteConfig, Integer> {
+public interface PositionRepository extends JpaRepository<Position, Integer> {
 
-	@Query("select a from SiteConfig a")
-	SiteConfig find();
+	@Query("select a from Position a where a.title = ?1")
+	public Position findByTitle(String title);
+
 }

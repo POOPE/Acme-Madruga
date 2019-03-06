@@ -1,3 +1,4 @@
+
 <%--
  * login.jsp
  *
@@ -19,12 +20,27 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="config/admin/update.do" modelAttribute="config">
+<display:table name="positions" id="row"
+		requestURI="${boxRequestURI}" pagesize="10" class="displaytag">
+		<display:column titleKey="position.title" property="title"/>
+		<display:column>
+			<a href="position/admin/edit.do?id=${row.id}">
+				<i
+					class="fa fa-pencil" aria-hidden="true"></i>
+			</a>
+		</display:column>
+		<display:column>
+			<a href="position/admin/delete.do?id=${row.id}">
+				<i
+					class="fa fa-times" aria-hidden="true"></i>
+			</a>
+		</display:column>
+</display:table>
+
+
+<form:form action="position/admin/edit.do" modelAttribute="position">
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
-	<acme:textbox code="config.sitename" path="siteName" />
-	<acme:textbox code="config.banner" path="bannerUrl" />
-	<acme:textbox code="config.welcome" path="welcomeMessage" />
-	<acme:textbox code="config.cc" path="countryCode" />
+	<acme:textbox code="position.title" path="title" />
 	<acme:submit name="save" code="save" />
 </form:form>

@@ -199,6 +199,8 @@
 		<property name="status" value="PENDING"/>		
 	</bean>
 	
+	<!-- site config -->
+	
 	<bean id="siteConfig" class="domain.SiteConfig">
 		<property name="siteName" value="Acme Madruga" />
 		<property name="bannerUrl" value=" https://tinyurl.com/acme-madruga" />
@@ -206,5 +208,33 @@
 		<property name="countryCode" value="34" />
 	</bean>
 	
+	<!-- position -->
+	<bean id="position1" class="domain.Position">
+		<property name="title" value="President" />
+	</bean>
+	
+	<bean id="position2" class="domain.Position">
+		<property name="title" value="Vice President" />
+	</bean>
+	
+	<bean id="position3" class="domain.Position">
+		<property name="title" value="Secretary" />
+	</bean>
+	
+	<bean id="position4" class="domain.Position">
+		<property name="title" value="Treasurer" />
+	</bean>
+	
+	<bean id="position5" class="domain.Position">
+		<property name="title" value="Historian" />
+	</bean>
+	
+	<bean id="position6" class="domain.Position">
+		<property name="title" value="Fundraiser" />
+	</bean>
+	
+	<bean id="position7" class="domain.Position">
+		<property name="title" value="Officer" />
+	</bean>
 	
 </beans>

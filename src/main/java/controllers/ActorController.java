@@ -26,7 +26,7 @@ import forms.RegisterForm;
 
 @Controller
 @RequestMapping("/actor")
-public class ActorController {
+public class ActorController extends AbstractController {
 
 	@Autowired
 	private MemberService		memberService;
@@ -82,7 +82,7 @@ public class ActorController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit() {
 		ModelAndView res;
-		ActorForm actorForm = this.actorService.generateForm(this.actorService.findPrincipal());
+		final ActorForm actorForm = this.actorService.generateForm(this.actorService.findPrincipal());
 		res = this.createActorEditModelAndView(actorForm);
 		return res;
 	}
@@ -120,11 +120,11 @@ public class ActorController {
 		return result;
 	}
 
-	protected ModelAndView createActorEditModelAndView(ActorForm actorForm) {
+	protected ModelAndView createActorEditModelAndView(final ActorForm actorForm) {
 		return this.createActorEditModelAndView(actorForm, null);
 	}
 
-	protected ModelAndView createActorEditModelAndView(ActorForm actorForm, final String messageCode) {
+	protected ModelAndView createActorEditModelAndView(final ActorForm actorForm, final String messageCode) {
 		ModelAndView result;
 
 		result = new ModelAndView("actor/edit");
