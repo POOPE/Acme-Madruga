@@ -15,18 +15,20 @@ public class SiteConfigurationService {
 
 	@Autowired
 	private SiteConfigurationRepository	siteConfigurationRepository;
+	@Autowired
+	private AdminService				adminService;
 
 
 	public SiteConfig find() {
 		return this.siteConfigurationRepository.find();
 	}
 
-	public SiteConfig update(SiteConfig siteConfig) {
+	public SiteConfig update(final SiteConfig siteConfig) {
 		return this.siteConfigurationRepository.save(siteConfig);
 	}
 
 	public SiteConfig restore() {
-		SiteConfig siteConfig = this.find();
+		final SiteConfig siteConfig = this.find();
 		siteConfig.setSiteName("Acme Handy Worker");
 		siteConfig.setBannerUrl("http://www.sample-banner.com/banner.png");
 		siteConfig.setWelcomeMessage("");
@@ -34,4 +36,5 @@ public class SiteConfigurationService {
 
 		return this.update(siteConfig);
 	}
+
 }

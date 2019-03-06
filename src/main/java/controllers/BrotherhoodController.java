@@ -14,23 +14,23 @@ import domain.Brotherhood;
 
 @Controller
 @RequestMapping("/brotherhood")
-public class BrotherhoodController {
+public class BrotherhoodController extends AbstractController {
 
 	@Autowired
 	private BrotherhoodService	brotherhoodService;
 
 
 	@RequestMapping(value = "/title", method = RequestMethod.GET)
-	public ModelAndView changeTitle(@RequestParam String title) {
+	public ModelAndView changeTitle(@RequestParam final String title) {
 		ModelAndView res;
 		res = new ModelAndView("redirect:/actor/profile.do");
 		try {
 			Assert.isTrue(title != "" && title != null);
-			Brotherhood brotherhood = this.brotherhoodService.findPrincipal();
+			final Brotherhood brotherhood = this.brotherhoodService.findPrincipal();
 			brotherhood.setTitle(title);
 			this.brotherhoodService.save(brotherhood);
-		} catch (Exception e) {
-			String messageCode = "brotherhood.commit.error";
+		} catch (final Exception e) {
+			final String messageCode = "brotherhood.commit.error";
 			res.addObject("message", messageCode);
 		}
 		return res;

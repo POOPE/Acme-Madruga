@@ -7,6 +7,14 @@
  * http://www.tdg-seville.info/License.html
  * 
  */
+ 
+.banner {
+ 	position:relative;
+ 	height:150px;
+ 	background-size:contain;
+ 	background-repeat:no-repeat;
+ }
+ 
 .hidden {
 	display: none;
 }

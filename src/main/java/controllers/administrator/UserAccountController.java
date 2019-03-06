@@ -17,11 +17,12 @@ import org.springframework.web.servlet.ModelAndView;
 import security.LoginService;
 import security.UserAccount;
 import services.ActorService;
+import controllers.AbstractController;
 import domain.Actor;
 
 @Controller
 @RequestMapping(value = "/user")
-public class UserAccountController {
+public class UserAccountController extends AbstractController {
 
 	@Autowired
 	private ActorService	actorService;
