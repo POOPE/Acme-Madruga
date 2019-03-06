@@ -12,7 +12,6 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -31,7 +30,7 @@ public class Enrollment extends DomainEntity {
 	public static final String	DENIED		= "DENIED";
 
 
-	@NotBlank
+	@ManyToOne(optional = false)
 	public Position getPosition() {
 		return this.position;
 	}
