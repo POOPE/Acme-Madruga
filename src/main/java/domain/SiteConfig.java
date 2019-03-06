@@ -4,7 +4,8 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -40,7 +41,8 @@ public class SiteConfig extends DomainEntity {
 		this.welcomeMessage = welcomeMessage;
 	}
 
-	@Size(min = 1, max = 3)
+	@Min(0)
+	@Max(999)
 	public Integer getCountryCode() {
 		return this.countryCode;
 	}
