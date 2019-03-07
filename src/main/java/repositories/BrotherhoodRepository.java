@@ -9,4 +9,5 @@ import domain.Brotherhood;
 @Repository
 public interface BrotherhoodRepository extends JpaRepository<Brotherhood, Integer> {
 
+
 }

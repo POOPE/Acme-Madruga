@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+
+	<definition name="bfloat/list" extends="master.page">	
+		<put-attribute name="title" value="Float List" />
+		<put-attribute name="body" value="/views/bfloat/list.jsp" />
+	</definition>
+	
+	<definition name="bfloat/myList" extends="master.page">	
+		<put-attribute name="title" value="My Floats" />
+		<put-attribute name="body" value="/views/bfloat/list.jsp" />
+	</definition>
+	
+	<definition name="bfloat/edit" extends="master.page">	
+		<put-attribute name="title" value="Float" />
+		<put-attribute name="body" value="/views/bfloat/edit.jsp" />
+	</definition>
+	
+	<definition name="bfloat/create" extends="master.page">	
+		<put-attribute name="title" value="New Float" />
+		<put-attribute name="body" value="/views/bfloat/edit.jsp" />
+	</definition>
+	
+	<definition name="bfloat/display" extends="master.page">	
+		<put-attribute name="title" value="Display Float" />
+		<put-attribute name="body" value="/views/bfloat/display.jsp" />
+	</definition>
+	
+</tiles-definitions>

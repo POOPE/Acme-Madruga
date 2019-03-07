@@ -23,6 +23,8 @@ public class BrotherhoodService {
 	private ActorService			actorService;
 	@Autowired
 	private AttachmentService		attachmentService;
+	@Autowired
+	private BrotherhoodFloatService		bFloatService;
 
 
 	public Brotherhood findPrincipal() {
@@ -61,5 +63,9 @@ public class BrotherhoodService {
 	public Brotherhood save(final Brotherhood brotherhood) {
 		return this.brotherhoodRepo.save(brotherhood);
 
+	}
+
+	public Brotherhood findByBFloat(final int bFloatId){
+		return this.bFloatService.findById(bFloatId).getBrotherhood();
 	}
 }

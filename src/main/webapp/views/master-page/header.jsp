@@ -70,11 +70,21 @@
 					<li><a href="announcement/reviewer/list-to-review.do"><spring:message code="master.page.customer.list-to-review" /></a></li>					
 				</ul>
 			</li>
+			
+				<li><a class="fNiv"><spring:message	code="master.page.brotherhood" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="bfloat/myList.do"><spring:message code="master.page.brotherhood.bfloat.mylist" /></a></li>					
+					<li><a href="procession/myList.do"><spring:message code="master.page.brotherhood.procession.mylist" /></a></li>
+				</ul>
+			</li>
 		</security:authorize>
 		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 			<li><a class="fNiv" href="actor/register.do"><spring:message code="master.page.register" /></a></li>
+			<li><a class="fNiv" href="procession/list.do"><spring:message code="master.page.procession" /></a></li>
+			<li><a class="fNiv" href="bfloat/list.do"><spring:message code="master.page.bfloat" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">

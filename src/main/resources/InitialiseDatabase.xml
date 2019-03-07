@@ -16,7 +16,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	">
 	
-	<!-- User accounts -->
+	<!-- User accounts 
 
 	<bean id="userAccount1" class="security.UserAccount">
 		<property name="username" value="admin" />
@@ -30,7 +30,9 @@
 		</property>
 	</bean>
 	
-	<!-- Administrators -->
+	-->
+	
+	<!-- Administrators 
 	
 	<bean id="administrator1" class="domain.Administrator">
 		<property name="name" value="Administrator 1" />
@@ -39,5 +41,5 @@
 		<property name="address" value="Address 1" />
 		<property name="userAccount" ref="userAccount1" />		
 	</bean>
-	
+	-->
 </beans>
