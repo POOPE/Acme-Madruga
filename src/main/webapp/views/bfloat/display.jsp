@@ -13,15 +13,13 @@
 
 <div>
 	<h3>
-		<spring:message code="bFloat.title" />
+		<jstl:out value="${brotherhoodFloat.title}"/>
 	</h3>
 </div>
 <div>
-	<spring:message code="bFloat.description" />
-	<br />
 	<spring:message code="bFloat.organize" />
-	&nbsp;<a href="actor/profile.do?id=${bFloat.owner.id}"><jstl:out
-			value="bFloat.owner.title" /></a>
+	&nbsp;<a href="actor/profile.do?id=${brotherhoodFloat.owner.id}"><jstl:out
+			value="${brotherhoodFloat.owner.title}" /></a>
 </div>
 
 <div>

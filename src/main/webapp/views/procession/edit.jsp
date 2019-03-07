@@ -1,58 +1,40 @@
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 
-<%@taglib prefix="jstl"	uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <form:form action="procession/edit.do" modelAttribute="procession">
-	
+
 	<%-- Hidden properties from procession--%>
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="brotherhood" />
-	<form:hidden path="ticker"/>
+	<form:hidden path=floats/>
 
-	
-	<%-- description--%>
-	<form:label path="description">
-		<spring:message code="procession.description" />
-	</form:label>
-	<form:textarea path="description" />	
-	<form:errors class="error" path="description" />
-	<br><br>
+	<acme:textbox code="procession.title" path="title" />
+	<acme:textbox code="procession.description" path="description" />
+	<acme:textbox code="procession.moment" path="moment" placeholder="dd/mm/yyyy"/>
 
-	<%-- title --%>
-	<form:label path="title">
-		<spring:message code="procession.title" />
-	</form:label>
-	<form:input path="title" />	
-	<form:errors class="error" path="title" />
-	<br><br>
-	
-	<%-- moment --%>
-	<form:label path="moment">
-		<spring:message code="procession.moment" />
-	</form:label>
-	<form:input path="moment" placeholder="dd/mm/yyyy" format="{0,date,dd/MM/yyyy HH:mm}" />	
-	<form:errors class="error" path="moment" />
-	<br><br>
-	
+<br>
 	<%-- Buttons --%>
 	<security:authorize access="hasRole('BROTHERHOOD')">
-		<input type="submit" name="save" 
-			value="<spring:message code="procession.save"/>"/>
-		
-		<jstl:if test="${procession.id != 0}">	
-		<input type="submit" name="delete" 
-			value="<spring:message code="procession.delete"/>"/>
+		<input type="submit" name="save"
+			value="<spring:message code="procession.save"/>" />
+
+		<jstl:if test="${procession.id != 0}">
+			<a href="procession/super/delete.do?id=${procession.id}" class="button"><button type="button"><spring:message code="procession.delete"/></button> </a>
 		</jstl:if>
-			
+
 		<input type="button" name="cancel"
 			value="<spring:message code="procession.cancel" />"
 			onClick="javascript: window.location.replace('procession/myList.do')" />
-			
+
 	</security:authorize>
-	<br><br>
+	
+	<br>
 </form:form>
