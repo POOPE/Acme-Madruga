@@ -9,12 +9,12 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="procession/edit.do" modelAttribute="procession">
+<form:form action="procession/super/edit.do" modelAttribute="procession">
 
 	<%-- Hidden properties from procession--%>
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path=floats/>
+	<form:hidden path="bFloats"/>
 
 	<acme:textbox code="procession.title" path="title" />
 	<acme:textbox code="procession.description" path="description" />

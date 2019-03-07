@@ -52,11 +52,12 @@ public class ProcessionService {
 		res.setTitle(procession.getTitle());
 		res.setMoment(procession.getMoment());
 		String floats = "";
-		for (int i = 0; i < procession.getbFloats().size(); i++)
-			if (i < procession.getbFloats().size() - 1)
-				floats = floats + procession.getbFloats().get(i) + ",";
-			else
-				floats = floats + procession.getbFloats().get(i);
+		if (procession.getbFloats() != null || !procession.getbFloats().isEmpty())
+			for (int i = 0; i < procession.getbFloats().size(); i++)
+				if (i < procession.getbFloats().size() - 1)
+					floats = floats + procession.getbFloats().get(i) + ",";
+				else
+					floats = floats + procession.getbFloats().get(i);
 		res.setbFloats(floats);
 		return res;
 	}
@@ -83,6 +84,7 @@ public class ProcessionService {
 		final Brotherhood brotherhood = this.brotherhoodService.findPrincipal();
 		final Procession result = new Procession();
 		result.setBrotherhood(brotherhood);
+		result.setbFloats(new ArrayList<BrotherhoodFloat>());
 		return result;
 	}
 

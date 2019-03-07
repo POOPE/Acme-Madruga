@@ -1,7 +1,9 @@
 
 package controllers;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -9,11 +11,13 @@ import javax.validation.Valid;
 
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -141,14 +145,9 @@ public class ProcessionController extends AbstractController {
 	@RequestMapping(value = "/super/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final ProcessionForm procession, final BindingResult binding) {
 		ModelAndView result;
-
-		if (binding.hasErrors()) {
-			final List<ObjectError> errors = binding.getAllErrors();
-			for (final ObjectError e : errors)
-				System.out.println(e.toString());
+		if (binding.hasErrors())
 			result = this.createEditModelAndView(procession);
-
-		} else
+		else
 			try {
 				this.processionService.save(procession);
 				result = new ModelAndView("redirect:/procession/myList.do");
@@ -185,5 +184,11 @@ public class ProcessionController extends AbstractController {
 		result.addObject("procession", procession);
 		result.addObject("floats", floats);
 		return result;
+	}
+
+	@InitBinder
+	public void initBinder(final WebDataBinder binder) {
+		final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
 	}
 }
