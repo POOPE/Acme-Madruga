@@ -17,9 +17,6 @@
 <title>Terms and Conditions</title>
 </head>
 <body>
-	<h1>
-		<spring:message code="terms.cond.1" />
-	</h1>
 	<h2>
 		<spring:message code="terms.cond.2" />
 	</h2>
