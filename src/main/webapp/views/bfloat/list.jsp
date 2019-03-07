@@ -9,39 +9,47 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <security:authorize access="permitAll">
-	<jstl:set var="uri" value="bfloat/list.do"/>
+	<jstl:set var="uri" value="bfloat/list.do" />
 </security:authorize>
 <security:authorize access="hasRole('BROTHERHOOD')">
-	<jstl:set var="uri" value="bfloat/myList.do"/>
+	<jstl:set var="uri" value="bfloat/myList.do" />
 </security:authorize>
 <display:table name="brotherhoodFloats" id="row" requestURI="${uri}"
 	pagesize="5" class="displaytag">
 
 	<!-- title -->
 	<spring:message code="bFloat.title" var="titleHeader" />
-	<display:column property="title" title="${titleHeader}"
-		sortable="true" />
-		
+	<display:column property="title" title="${titleHeader}" sortable="true" />
+
 	<!-- description -->
 	<spring:message code="bFloat.description" var="descriptionHeader" />
 	<display:column property="description" title="${descriptionHeader}"
 		sortable="true" />
 
-	<!-- Display -->	
+	<!-- Display -->
 	<spring:message code="bFloat.display" var="displayHeader" />
 	<display:column title="${displayHeader}">
 		<a href="bfloat/display.do?bFloatID=${row.id}"> <spring:message
 				code="bFloat.display" /></a>
 	</display:column>
 
-	
+
 	<!-- Update -->
-	<security:authorize access="hasRole('BROTHERHOOD')">
-		<spring:message code="bFloat.update" var="updateHeader" />
-		<display:column title="${updateHeader}">
-			<a href="bfloat/update.do?bFloatID=${row.id}"> <spring:message
-					code="bFloat.update" /></a>
-		</display:column>
-	</security:authorize>
+	<display:column>
+		<security:authorize access="isAuthenticated()">
+			<jstl:set var="user">
+				<security:authentication property="principal.username" />
+			</jstl:set>
+			<jstl:if test="${row.owner.userAccount.username==user}">
+
+				<spring:message code="bFloat.update" var="updateHeader" />
+
+				<a href="bfloat/super/update.do?bFloatID=${row.id}"> <spring:message
+						code="bFloat.update" /></a>
+
+
+			</jstl:if>
+		</security:authorize>
+	</display:column>
 
 </display:table>

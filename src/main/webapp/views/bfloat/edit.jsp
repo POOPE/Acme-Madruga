@@ -14,7 +14,6 @@
 	<%-- Hidden properties from bFloat--%>
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="photos" />
 	<form:hidden path="owner" />
 
 	<acme:textbox code="bFloat.title" path="title" />
@@ -35,9 +34,8 @@
 		<input type="submit" name="save"
 			value="<spring:message code="bFloat.save"/>" />
 
-		<jstl:if test="${bFloat.id != 0}">
-			<input type="submit" name="delete"
-				value="<spring:message code="bFloat.delete"/>" />
+		<jstl:if test="${floatForm.id != 0}">
+			<a href="bfloat/super/delete.do?id=${floatForm.id}" class="button"><button type="button"><spring:message code="bFloat.delete"/></button> </a>
 		</jstl:if>
 
 		<input type="button" name="cancel"

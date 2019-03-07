@@ -19,25 +19,30 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.BrotherhoodFloatService;
 import services.BrotherhoodService;
 import services.FloatPictureService;
 import services.ProcessionService;
 import domain.Brotherhood;
-import domain.FloatPicture;
+import domain.BrotherhoodFloat;
 import domain.Procession;
+import forms.ProcessionForm;
 
 @Controller
 @RequestMapping("/procession")
 public class ProcessionController extends AbstractController {
 
 	@Autowired
-	private ProcessionService	processionService;
+	private ProcessionService		processionService;
 
 	@Autowired
-	private BrotherhoodService	broService;
+	private BrotherhoodService		broService;
 
 	@Autowired
-	private FloatPictureService	fPictureService;
+	private FloatPictureService		fPictureService;
+
+	@Autowired
+	private BrotherhoodFloatService	bFloatService;
 
 
 	@ExceptionHandler(TypeMismatchException.class)
@@ -58,7 +63,7 @@ public class ProcessionController extends AbstractController {
 	}
 
 	// My List -------------------------------------------------------------
-	@RequestMapping(value = "brother/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/brother/list", method = RequestMethod.GET)
 	public ModelAndView mylist(@RequestParam(required = false) final Integer id) {
 		ModelAndView result;
 		final Brotherhood bro;
@@ -103,17 +108,17 @@ public class ProcessionController extends AbstractController {
 	}
 
 	// Create & Edit -----------------------------------------------------------
-	@RequestMapping(value = "super/create", method = RequestMethod.GET)
+	@RequestMapping(value = "/super/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 
 		final Procession procession = this.processionService.create();
 
-		final ModelAndView result = this.createEditModelAndView(procession);
+		final ModelAndView result = this.createEditModelAndView(this.processionService.formatForm(procession));
 
 		return result;
 	}
 
-	@RequestMapping(value = "super/update", method = RequestMethod.GET)
+	@RequestMapping(value = "/super/update", method = RequestMethod.GET)
 	public ModelAndView update(@RequestParam final int processionID) {
 		ModelAndView result;
 		Procession procession;
@@ -128,13 +133,13 @@ public class ProcessionController extends AbstractController {
 			return result;
 		}
 
-		result = this.createEditModelAndView(procession);
+		result = this.createEditModelAndView(this.processionService.formatForm(procession));
 
 		return result;
 	}
 
-	@RequestMapping(value = "brother/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Procession procession, final BindingResult binding) {
+	@RequestMapping(value = "/super/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final ProcessionForm procession, final BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors()) {
@@ -145,12 +150,6 @@ public class ProcessionController extends AbstractController {
 
 		} else
 			try {
-				if (procession.getId() != 0) {
-					// Check principal own this procession
-					final Brotherhood principal = this.broService.findPrincipal();
-					Assert.isTrue(procession.getBrotherhood().equals(principal));
-				}
-
 				this.processionService.save(procession);
 				result = new ModelAndView("redirect:/procession/myList.do");
 			} catch (final Throwable oops) {
@@ -160,28 +159,17 @@ public class ProcessionController extends AbstractController {
 	}
 
 	// Delete ------------------------------------------------------
-	@RequestMapping(value = "brother/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(final Procession procession, final BindingResult binding) {
+	@RequestMapping(value = "/super/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam final int id) {
 		ModelAndView result;
-
-		try {
-
-			// Check principal own this fixUptask
-			final Brotherhood principal = this.broService.findPrincipal();
-			Assert.isTrue(procession.getBrotherhood().equals(principal));
-
-			this.processionService.delete(procession);
-			result = new ModelAndView("redirect:/procession/myList.do");
-		} catch (final Throwable oops) {
-			oops.printStackTrace();
-			result = this.createEditModelAndView(procession, "procession.commit.error");
-		}
-
+		final Procession procession = this.processionService.findById(id);
+		this.processionService.delete(procession);
+		result = new ModelAndView("redirect:/brother/list.do");
 		return result;
 	}
 
 	// Ancillary methods ------------------------------------------------------
-	protected ModelAndView createEditModelAndView(final Procession procession) {
+	protected ModelAndView createEditModelAndView(final ProcessionForm procession) {
 		ModelAndView result;
 
 		result = this.createEditModelAndView(procession, null);
@@ -189,14 +177,13 @@ public class ProcessionController extends AbstractController {
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final Procession procession, final String message) {
+	protected ModelAndView createEditModelAndView(final ProcessionForm procession, final String message) {
 		ModelAndView result;
-		final int processionId = procession.getId();
-		final Collection<FloatPicture> fPictures = this.fPictureService.findByFloat(processionId);
+		final List<BrotherhoodFloat> floats = this.bFloatService.findByBrotherhood(procession.getId());
 
 		result = new ModelAndView("procession/edit");
 		result.addObject("procession", procession);
-		result.addObject("floatPictures", fPictures);
+		result.addObject("floats", floats);
 		return result;
 	}
 }

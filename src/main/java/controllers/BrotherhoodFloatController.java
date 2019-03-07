@@ -59,7 +59,7 @@ public class BrotherhoodFloatController extends AbstractController {
 	}
 
 	// My List -------------------------------------------------------------
-	@RequestMapping(value = "brother/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/brother/list", method = RequestMethod.GET)
 	public ModelAndView mylist(@RequestParam(required = false) final Integer id) {
 		ModelAndView result;
 		final Brotherhood bro;
@@ -107,7 +107,7 @@ public class BrotherhoodFloatController extends AbstractController {
 	}
 
 	// Create & Edit -----------------------------------------------------------
-	@RequestMapping(value = "super/create", method = RequestMethod.GET)
+	@RequestMapping(value = "/super/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 
 		final BrotherhoodFloat bFloat = this.bFloatService.create();
@@ -117,7 +117,7 @@ public class BrotherhoodFloatController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "super/update", method = RequestMethod.GET)
+	@RequestMapping(value = "/super/update", method = RequestMethod.GET)
 	public ModelAndView update(@RequestParam final int bFloatID) {
 		ModelAndView result;
 		BrotherhoodFloat bFloat;
@@ -129,14 +129,14 @@ public class BrotherhoodFloatController extends AbstractController {
 			result = this.createEditModelAndView(bFloat);
 		} catch (final Exception e) {
 			JOptionPane.showMessageDialog(null, "Forbidden operation");
-			result = new ModelAndView("redirect:/bfloat/myList.do");
+			result = new ModelAndView("redirect:/brother/list.do");
 			return result;
 		}
 
 		return result;
 	}
 
-	@RequestMapping(value = "super/edit", method = RequestMethod.POST, params = "save")
+	@RequestMapping(value = "/super/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final FloatForm bFloat, final BindingResult binding) {
 		ModelAndView result;
 
@@ -149,31 +149,20 @@ public class BrotherhoodFloatController extends AbstractController {
 		} else
 			try {
 				this.bFloatService.save(bFloat);
-				result = new ModelAndView("redirect:/bfloat/myList.do");
-			} catch (final Throwable oops) {
+				result = new ModelAndView("redirect:/brother/list.do");
+			} catch (final Exception e) {
 				result = this.createEditModelAndView(this.bFloatService.parseForm(bFloat), "bFloat.commit.error");
 			}
 		return result;
 	}
-
 	// Delete ------------------------------------------------------
-	@RequestMapping(value = "super/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(final BrotherhoodFloat bFloat, final BindingResult binding) {
+	@RequestMapping(value = "/super/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam final int id) {
 		ModelAndView result;
-
-		try {
-
-			// Check principal own this float
-			final Brotherhood principal = this.broService.findPrincipal();
-			Assert.isTrue(bFloat.getOwner().equals(principal));
-
-			this.bFloatService.delete(bFloat);
-			result = new ModelAndView("redirect:/bfloat/myList.do");
-		} catch (final Throwable oops) {
-			oops.printStackTrace();
-			result = this.createEditModelAndView(bFloat, "bFloat.commit.error");
-		}
-
+		final BrotherhoodFloat bFloat = this.bFloatService.findById(id);
+		Assert.isTrue(bFloat.getOwner().equals(this.broService.findPrincipal()));
+		this.bFloatService.delete(bFloat);
+		result = new ModelAndView("redirect:/brother/list.do");
 		return result;
 	}
 

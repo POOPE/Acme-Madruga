@@ -1,18 +1,23 @@
 
 package forms;
 
+import java.util.Date;
+
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
-public class FloatForm {
+public class ProcessionForm {
 
 	private Integer	id;
 	private Integer	version;
 	private String	title;
 	private String	description;
-	private Integer	owner;
-	private String	photos;
+	private String	bFloats;
+	private Date	moment;
 
 
 	@NotNull
@@ -51,21 +56,23 @@ public class FloatForm {
 		this.description = description;
 	}
 
+	public String getbFloats() {
+		return this.bFloats;
+	}
+
+	public void setbFloats(final String bFloats) {
+		this.bFloats = bFloats;
+	}
+
 	@NotNull
-	public Integer getOwner() {
-		return this.owner;
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	public Date getMoment() {
+		return this.moment;
 	}
 
-	public void setOwner(final Integer owner) {
-		this.owner = owner;
-	}
-
-	public String getPhotos() {
-		return this.photos;
-	}
-
-	public void setPhotos(final String photos) {
-		this.photos = photos;
+	public void setMoment(final Date moment) {
+		this.moment = moment;
 	}
 
 }

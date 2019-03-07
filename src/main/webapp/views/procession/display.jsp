@@ -42,7 +42,7 @@
 	<display:column property="title" titleKey="procession.title" />
 	<display:column property="description" titleKey="procession.title" />
 	<display:column>
-		<a href="bfloat/display.do?brotherhoodID=${row.id}"> <spring:message
+		<a href="bfloat/display.do?bFloatID=${row.id}"> <spring:message
 				code="procession.display" />
 		</a>
 	</display:column>
