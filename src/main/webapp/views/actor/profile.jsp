@@ -96,7 +96,7 @@
 </jstl:if>
 <jstl:if test="${role=='BROTHERHOOD'}">
 	<div>
-		<a href="#"><spring:message code="brotherhood.members" /></a>
+		<a href="brotherhood/brother/members.do?id=${actor.id}"><spring:message code="brotherhood.members" /></a>
 	</div>
 	<div>
 		<a href="procession/brother/list.do?id=${actor.id}"><spring:message

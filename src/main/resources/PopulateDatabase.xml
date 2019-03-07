@@ -273,6 +273,26 @@
 		</property>
 	</bean>
 	
+	<!-- request -->
+	
+	<bean id="request1" class="domain.Request">
+		<property name="status" value="ACCEPTED"/>
+		<property name="procession" ref="procession1" />
+		<property name="author" ref="member1" />
+		<property name="posColumn" value="4" />
+		<property name="posRow" value="20" />
+		<property name="comment" value="" />
+	</bean>
+	
+	<bean id="request2" class="domain.Request">
+		<property name="status" value="DENIED"/>
+		<property name="procession" ref="procession1" />
+		<property name="author" ref="member2" />
+		<property name="posColumn" value="9999" />
+		<property name="posRow" value="9999" />
+		<property name="comment" value="y u follow de way of de deevil" />
+	</bean>
+	
 	<!-- float -->
 	
 	<bean id="float1" class="domain.BrotherhoodFloat">

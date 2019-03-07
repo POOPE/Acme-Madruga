@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -140,13 +139,9 @@ public class BrotherhoodFloatController extends AbstractController {
 	public ModelAndView save(@Valid final FloatForm bFloat, final BindingResult binding) {
 		ModelAndView result;
 
-		if (binding.hasErrors()) {
-			final List<ObjectError> errors = binding.getAllErrors();
-			for (final ObjectError e : errors)
-				System.out.println(e.toString());
+		if (binding.hasErrors())
 			result = this.createEditModelAndView(this.bFloatService.parseForm(bFloat));
-
-		} else
+		else
 			try {
 				this.bFloatService.save(bFloat);
 				result = new ModelAndView("redirect:/brother/list.do");

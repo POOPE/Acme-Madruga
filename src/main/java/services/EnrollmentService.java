@@ -23,6 +23,10 @@ public class EnrollmentService {
 	private MemberService			memberService;
 
 
+	public List<Enrollment> findAcceptedByBrotherhood(final Brotherhood brotherhood) {
+		return this.enrollmentRepository.findMembers(brotherhood.getId());
+	}
+
 	public Enrollment create(final Brotherhood b) {
 
 		final Enrollment w = new Enrollment();

@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -13,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import repositories.BrotherhoodRepository;
 import domain.Actor;
 import domain.Brotherhood;
+import domain.Enrollment;
+import domain.Member;
 import forms.RegisterForm;
 
 @Service
@@ -27,7 +30,17 @@ public class BrotherhoodService {
 	private AttachmentService		attachmentService;
 	@Autowired
 	private BrotherhoodFloatService	bFloatService;
+	@Autowired
+	private EnrollmentService		enrollmentService;
 
+
+	public List<Member> findMembers(final Brotherhood brotherhood) {
+		final List<Member> res = new ArrayList<>();
+		final List<Enrollment> enrollments = this.enrollmentService.findAcceptedByBrotherhood(brotherhood);
+		for (final Enrollment enrollment : enrollments)
+			res.add(enrollment.getMember());
+		return res;
+	}
 
 	public Brotherhood findById(final int id) {
 		return this.brotherhoodRepo.findOne(id);

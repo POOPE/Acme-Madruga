@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.BrotherhoodService;
 import domain.Brotherhood;
+import domain.Member;
 
 @Controller
 @RequestMapping("/brotherhood")
@@ -45,6 +46,20 @@ public class BrotherhoodController extends AbstractController {
 		final List<Brotherhood> actors = this.brotherhoodService.findAll();
 		res.addObject("actors", actors);
 		res.addObject("brother", true);
+		return res;
+	}
+
+	@RequestMapping(value = "/brother/members", method = RequestMethod.GET)
+	public ModelAndView members(@RequestParam(required = false) final Integer id) {
+		ModelAndView res;
+		res = new ModelAndView("actor/list");
+		Brotherhood brotherhood;
+		if (id == null || id == 0)
+			brotherhood = this.brotherhoodService.findPrincipal();
+		else
+			brotherhood = this.brotherhoodService.findById(id);
+		final List<Member> actors = this.brotherhoodService.findMembers(brotherhood);
+		res.addObject("actors", actors);
 		return res;
 	}
 }

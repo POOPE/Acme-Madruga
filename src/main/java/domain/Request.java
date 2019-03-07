@@ -4,6 +4,7 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -12,7 +13,7 @@ import javax.validation.constraints.Pattern;
 @Access(AccessType.PROPERTY)
 public class Request extends DomainEntity {
 
-	private Actor				author;
+	private Member				author;
 	private Procession			procession;
 	private Integer				posColumn;
 	private Integer				posRow;
@@ -25,15 +26,17 @@ public class Request extends DomainEntity {
 
 
 	@NotNull
-	public Actor getAuthor() {
+	@ManyToOne(optional = false)
+	public Member getAuthor() {
 		return this.author;
 	}
 
-	public void setAuthor(final Actor author) {
+	public void setAuthor(final Member author) {
 		this.author = author;
 	}
 
 	@NotNull
+	@ManyToOne(optional = false)
 	public Procession getProcession() {
 		return this.procession;
 	}

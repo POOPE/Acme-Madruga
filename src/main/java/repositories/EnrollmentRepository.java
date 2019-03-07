@@ -27,4 +27,7 @@ public interface EnrollmentRepository extends JpaRepository<Enrollment, Integer>
 	@Query("select e from Enrollment e where e.broder.id = ?1")
 	public List<Enrollment> findByBrotherhood(int id);
 
+	@Query("select e from Enrollment e where e.broder.id = ?1 and e.status='ACCEPTED'")
+	public List<Enrollment> findMembers(int id);
+
 }

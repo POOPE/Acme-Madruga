@@ -26,8 +26,8 @@
 		<div>
 			<b><spring:message code="actor.account" /></b>
 		</div>
-		<acme:select onchange="checkBrotherhood();" id="role" code="actor.role" items="${roles}" path="role"
-			itemsAsCodes="true" />
+		<acme:select onchange="checkBrotherhood();" id="role"
+			code="actor.role" items="${roles}" path="role" itemsAsCodes="true" />
 		<acme:textbox code="actor.username" path="username" />
 		<acme:password code="actor.password" path="password" id="password"
 			tooltip="actor.password.tooltip" />
@@ -73,6 +73,12 @@
 		</div>
 		<div id="attachments"></div>
 
+	</div>
+	<div>
+		<input type="checkbox" id="terms-conditions">
+		<spring:message code="terms.accept" />
+		&nbsp;<a href="terms/conditions.do"><spring:message
+				code="terms.terms" /></a>
 	</div>
 	<div>
 		<acme:submit name="save" code="actor.register" />
