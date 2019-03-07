@@ -27,10 +27,14 @@
 
 	<!-- Attributes -->
 	<jstl:if test="${brother}">
-		<display:column title="actor.firstname" sortable="true">
+		<spring:message code="actor.name" var="acname" />
+		<display:column title="${acname}" sortable="true">
 			<a href="actor/profile.do?id=${row.id}"> <jstl:out value="${row.title}" />
 			</a>
 		</display:column>
+		
+		
+		
 	</jstl:if>
 	<jstl:if test="${empty brother}">
 		<display:column titleKey="actor.firstname" sortable="true">
