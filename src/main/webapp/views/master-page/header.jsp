@@ -81,6 +81,24 @@
 								code="master.page.create" /></a></li>
 					</security:authorize>
 				</ul></li>
+		<!-- enrollments -->
+			<li><a class="fNiv"><spring:message
+						code="master.page.enrollments" /></a>
+				<ul>
+					<li class="arrow"></li>
+					
+					<security:authorize access="hasRole('BROTHERHOOD')">
+					<li><a href="enrollment/brotherhood/list.do"><spring:message
+								code="master.page.browse"/></a></li>
+					
+					</security:authorize>
+					
+					<security:authorize access="hasRole('MEMBER')">
+					<li><a href="enrollment/member/list.do"><spring:message
+								code="master.page.mine" /></a></li>
+					
+					</security:authorize>
+				</ul></li>
 		<!-- admin -->
 		<security:authorize access="hasRole('ADMIN')">
 			<li><a class="fNiv"><spring:message

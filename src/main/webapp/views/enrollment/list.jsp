@@ -23,28 +23,30 @@
 <display:table name="enrollments" id="row" requestURI="${requestURI}"
 	pagesize="10" class="displaytag">
 	
-	<display:column titleKey="enrollment.member">
-		<a href="enrollment/view.do?id=${row.enrollment.id}">
-			<jstl:out value="${row.enrollment.member}"/>
-		</a>
-	</display:column>
-	<display:column class="moment" titleKey="enrollment.moment">
-		<fmt:formatDate  value="${row.moment}" />
-	</display:column>
-	<display:column property="ticker" titleKey="enrollment.ticker"/>
-	<display:column>
-		<jstl:if test="${!row.locked}">
-			<a href="lorem/customer/edit.do?id=${row.id}">
-					<spring:message code="lorem.edit"/>			</a>
-		</jstl:if>
-	</display:column>
-	<display:column>
-		<jstl:if test="${!row.locked}">
-			<a href="enrollment/customer/delete.do?id=${row.id}">
-			<spring:message code="enrollment.delete"/>	</a>
-		</jstl:if>
-	</display:column>
-
+		<security:authorize access="hasRole('BROTHERHOOD')">
+		
+		
+		 
+		<display:column property="member.name" titleKey="enrollment.member"
+		 />
+		
+		</security:authorize>	
+		
+		
+		<spring:message code="enrollment.status" var="enrollstatus" />
+		<display:column title="${enrollstatus}" >
+			 <jstl:out value="${row.status}" />
+			
+		</display:column>
+		<security:authorize access="hasRole('MEMBER')">
+		
+		<display:column property="broder.name" titleKey="enrollment.broder"/>
+			
+		
+		</security:authorize>	
+			
 	
+	<jstl:set var="uri" value="procession/myList.do"/>
+
 	
 </display:table>

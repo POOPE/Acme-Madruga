@@ -47,6 +47,7 @@
 		<security:intercept-url pattern="/procession/super/**" access="hasRole('BROTHERHOOD')" /> 
 		<security:intercept-url pattern="/procession/**" access="permitAll" /> 
 
+		<security:intercept-url pattern="/enrollment/**" access="permitAll" />
 		
 		<security:intercept-url pattern="/brotherhood/list.do" access="permitAll" />
 		<security:intercept-url pattern="/brotherhood/**" access="hasRole('BROTHERHOOD')" />
