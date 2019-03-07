@@ -25,13 +25,12 @@
 		<value>/views/welcome/messages</value>
 		
 		<value>/views/actor/messages</value>
-		<value>/views/announcement/messages</value>
-		<value>/views/certification/messages</value>
-		<value>/views/exam/messages</value>
+		<value>/views/bfloat/messages</value>
 		<value>/views/config/messages</value>
 		<value>/views/position/messages</value>
-		<value>/views/log/messages</value>
-		<value>/views/bfloat/messages</value>
+		<value>/views/enrollment/messages</value>
+		<value>/views/procession/messages</value>		
+		<value>/views/log/tiles.xml</value>
 	</util:list>
 
 </beans>

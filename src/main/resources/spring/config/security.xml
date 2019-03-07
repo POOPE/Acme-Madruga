@@ -41,19 +41,16 @@
 		<security:intercept-url pattern="/config/admin/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/position/admin/**" access="hasRole('ADMIN')" />
 		
-		<security:intercept-url pattern="/bfloat/myList.do" access="hasRole('BROTHERHOOD')" /> 
-		<security:intercept-url pattern="/bfloat/edit.do" access="hasRole('BROTHERHOOD')" /> 
-		<security:intercept-url pattern="/bfloat/create.do" access="hasRole('BROTHERHOOD')" />
-		<security:intercept-url pattern="/bfloat/update.do" access="hasRole('BROTHERHOOD')" />
-		<security:intercept-url pattern="/bfloat/list.do" access="permitAll" /> 
-		<security:intercept-url pattern="/bfloat/display.do" access="permitAll" /> 
+		<security:intercept-url pattern="/bfloat/super/**" access="hasRole('BROTHERHOOD')" /> 
+		<security:intercept-url pattern="/bfloat/**" access="permitAll" /> 
 		
-		<security:intercept-url pattern="/procession/brother/**" access="hasRole('BROTHERHOOD')" /> 
+		<security:intercept-url pattern="/procession/super/**" access="hasRole('BROTHERHOOD')" /> 
 		<security:intercept-url pattern="/procession/**" access="permitAll" /> 
 
 		
-		
+		<security:intercept-url pattern="/brotherhood/list.do" access="permitAll" />
 		<security:intercept-url pattern="/brotherhood/**" access="hasRole('BROTHERHOOD')" />
+		
 		<security:intercept-url pattern="/logs/admin/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/actor/**" access="permitAll" /> 
 		<security:intercept-url pattern="/user/**" access="isAuthenticated()" /> 

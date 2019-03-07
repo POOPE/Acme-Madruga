@@ -21,12 +21,13 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<security:authorize access="hasRole('BROTHERHOOD')">
+<jstl:if test="${role=='BROTHERHOOD'}">
 	<div>
 		<jstl:if test="${photos != null}">
 			<div class="inline-outer">
 				<jstl:forEach items="${photos}" var="attachment">
-					<div class="inline attachment-150" style="background-image:url('${attachment.URL}')"></div>
+					<div class="inline attachment-150"
+						style="background-image:url('${attachment.URL}')"></div>
 				</jstl:forEach>
 			</div>
 		</jstl:if>
@@ -38,15 +39,15 @@
 	<div>
 		<h3>
 			<jstl:out value="${actor.title}" />
-<!-- 			<i id="edittitle" class="fa fa-pencil" aria-hidden="true"></i> -->
+			<!-- 			<i id="edittitle" class="fa fa-pencil" aria-hidden="true"></i> -->
 		</h3>
-<%-- 		<form action="brotherhood/title.do" method="get" id="titleform"> --%>
-<!-- 			<div> -->
-<%-- 				<spring:message code="actor.title" /> --%>
-<!-- 				: <input type="text" name="title"> <input type="submit" -->
-<%-- 					value="<spring:message code="save"/>"> --%>
-<!-- 			</div> -->
-<%-- 		</form> --%>
+		<%-- 		<form action="brotherhood/title.do" method="get" id="titleform"> --%>
+		<!-- 			<div> -->
+		<%-- 				<spring:message code="actor.title" /> --%>
+		<!-- 				: <input type="text" name="title"> <input type="submit" -->
+		<%-- 					value="<spring:message code="save"/>"> --%>
+		<!-- 			</div> -->
+		<%-- 		</form> --%>
 		<jstl:if test="${message}">
 			<div>
 				<spring:message code="${message}" />
@@ -55,7 +56,7 @@
 		<span style="color: grey;">Est. <fmt:formatDate
 				value="${actor.estDate}" pattern="dd/MM/yyyy" /></span>
 	</div>
-</security:authorize>
+</jstl:if>
 <div>
 	<div class="inline-outer">
 		<div class="thumb inline"
@@ -88,7 +89,21 @@
 	</div>
 </div>
 <br />
-<div>
-	<a href="actor/edit.do"><spring:message code="edit" /></a>
-</div>
+<jstl:if test="${owner==true}">
+	<div>
+		<a href="actor/edit.do"><spring:message code="edit" /></a>
+	</div>
+</jstl:if>
+<jstl:if test="${role=='BROTHERHOOD'}">
+	<div>
+		<a href="#"><spring:message code="brotherhood.members" /></a>
+	</div>
+	<div>
+		<a href="procession/brother/list.do?id=${actor.id}"><spring:message
+				code="brotherhood.processions" /></a>
+	</div>
 
+	<div>
+		<a href="bfloat/brother/list.do?id=${actor.id}"><spring:message code="brotherhood.floats" /></a>
+	</div>
+</jstl:if>

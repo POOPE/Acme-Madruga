@@ -2,6 +2,7 @@
 package services;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,15 +22,21 @@ public class AttachmentService {
 	private ActorService			actorService;
 
 
-	public Attachment createForPrincipal(final String URL) {
-		return this.create(this.actorService.findPrincipal(), URL);
+	public ArrayList<Attachment> createAll(final List<String> urls, final Actor actor) {
+		final ArrayList<Attachment> res = new ArrayList<>();
+		for (final String url : urls) {
+			final Attachment pic = this.create();
+			pic.setURL(url);
+			pic.setOwner(actor);
+			final Attachment saved = this.save(pic);
+			res.add(saved);
+		}
+		return res;
 	}
 
-	public Attachment create(final Actor actor, final String URL) {
+	public Attachment create() {
 		final Attachment res = new Attachment();
-		res.setOwner(actor);
-		res.setURL(URL);
-		return this.save(res);
+		return res;
 	}
 
 	public ArrayList<Attachment> findByOwner(final Actor owner) {

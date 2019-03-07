@@ -1,6 +1,8 @@
 
 package controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -33,6 +35,16 @@ public class BrotherhoodController extends AbstractController {
 			final String messageCode = "brotherhood.commit.error";
 			res.addObject("message", messageCode);
 		}
+		return res;
+	}
+
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
+		final ModelAndView res;
+		res = new ModelAndView("actor/list");
+		final List<Brotherhood> actors = this.brotherhoodService.findAll();
+		res.addObject("actors", actors);
+		res.addObject("brother", true);
 		return res;
 	}
 }

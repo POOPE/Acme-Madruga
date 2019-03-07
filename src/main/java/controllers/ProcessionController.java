@@ -19,9 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import security.Authority;
-import security.LoginService;
-import security.UserAccount;
 import services.BrotherhoodService;
 import services.FloatPictureService;
 import services.ProcessionService;
@@ -62,17 +59,17 @@ public class ProcessionController extends AbstractController {
 
 	// My List -------------------------------------------------------------
 	@RequestMapping(value = "brother/list", method = RequestMethod.GET)
-	public ModelAndView mylist() {
+	public ModelAndView mylist(@RequestParam(required = false) final Integer id) {
 		ModelAndView result;
+		final Brotherhood bro;
+		if (id == null || id == 0)
+			bro = this.broService.findPrincipal();
+		else {
+			bro = this.broService.findById(id);
+			Assert.notNull(bro);
+		}
 
-		final UserAccount userAccount = LoginService.getPrincipal();
-		final Authority broAuthority = new Authority();
-		broAuthority.setAuthority("BROTHERHOOD");
-		Assert.isTrue(userAccount.getAuthorities().contains(broAuthority));
-
-		final Brotherhood bro = this.broService.findPrincipal();
-		final int broId = bro.getId();
-		final Collection<Procession> processions = this.processionService.findByBrotherhood(broId);
+		final Collection<Procession> processions = this.processionService.findByBrotherhood(bro.getId());
 		result = new ModelAndView("procession/myList");
 		result.addObject("processions", processions);
 		result.addObject("requestURI", "procession/myList.do");
@@ -106,7 +103,7 @@ public class ProcessionController extends AbstractController {
 	}
 
 	// Create & Edit -----------------------------------------------------------
-	@RequestMapping(value = "brother/create", method = RequestMethod.GET)
+	@RequestMapping(value = "super/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 
 		final Procession procession = this.processionService.create();
@@ -116,7 +113,7 @@ public class ProcessionController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "brother/update", method = RequestMethod.GET)
+	@RequestMapping(value = "super/update", method = RequestMethod.GET)
 	public ModelAndView update(@RequestParam final int processionID) {
 		ModelAndView result;
 		Procession procession;

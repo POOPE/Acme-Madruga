@@ -1,7 +1,9 @@
 
 package services;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -26,6 +28,14 @@ public class BrotherhoodService {
 	@Autowired
 	private BrotherhoodFloatService	bFloatService;
 
+
+	public Brotherhood findById(final int id) {
+		return this.brotherhoodRepo.findOne(id);
+	}
+
+	public List<Brotherhood> findAll() {
+		return this.brotherhoodRepo.findAll();
+	}
 
 	public Brotherhood findPrincipal() {
 		this.actorService.assertPrincipalAuthority("BROTHERHOOD");
@@ -53,12 +63,7 @@ public class BrotherhoodService {
 		brotherhood.setEstDate(new Date());
 		final Actor saved = this.save(brotherhood);
 
-		if (registerForm.getPhotos() != null && registerForm.getPhotos() != "") {
-			final String[] photos = registerForm.getPhotos().split(",");
-			for (int i = 0; i < photos.length; i++)
-				this.attachmentService.create(saved, photos[i]);
-
-		}
+		this.attachmentService.createAll(Arrays.asList(registerForm.getPhotos().split(",")), saved);
 	}
 	public Brotherhood save(final Brotherhood brotherhood) {
 		return this.brotherhoodRepo.save(brotherhood);

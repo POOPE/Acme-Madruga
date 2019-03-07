@@ -7,10 +7,12 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
@@ -65,19 +67,43 @@ public class ActorController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
-	public ModelAndView profile() {
+	public ModelAndView userProfile(@RequestParam(required = false) final Integer id) {
 		ModelAndView res;
 		res = new ModelAndView("actor/profile");
-		final Actor actor = this.actorService.findPrincipal();
-		if (this.actorService.getPrincipalAuthority().contains("BROTHERHOOD")) {
+		Actor actor;
+		if (id == null || id == 0) {
+			actor = this.actorService.findPrincipal();
+			res.addObject("owner", true);
+		} else {
+			actor = this.actorService.findOne(id);
+			Assert.notNull(actor);
+		}
+		if (this.actorService.getAuthority(actor).contains("BROTHERHOOD")) {
 			final Brotherhood brotherhood = (Brotherhood) actor;
 			res.addObject("actor", brotherhood);
 			final ArrayList<Attachment> attachments = this.attachmentService.findByOwner(brotherhood);
 			res.addObject("photos", attachments);
+			res.addObject("role", "BROTHERHOOD");
 		} else
 			res.addObject("actor", actor);
 		return res;
 	}
+
+	//	@RequestMapping(value = "/profile", method = RequestMethod.GET)
+	//	public ModelAndView profile() {
+	//		ModelAndView res;
+	//		res = new ModelAndView("actor/profile");
+	//		res.addObject("user", this.actorService.findPrincipal());
+	//		final Actor actor = this.actorService.findPrincipal();
+	//		if (this.actorService.getPrincipalAuthority().contains("BROTHERHOOD")) {
+	//			final Brotherhood brotherhood = (Brotherhood) actor;
+	//			res.addObject("actor", brotherhood);
+	//			final ArrayList<Attachment> attachments = this.attachmentService.findByOwner(brotherhood);
+	//			res.addObject("photos", attachments);
+	//		} else
+	//			res.addObject("actor", actor);
+	//		return res;
+	//	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit() {

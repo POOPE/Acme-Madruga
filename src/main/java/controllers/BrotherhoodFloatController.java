@@ -19,15 +19,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import security.Authority;
-import security.LoginService;
-import security.UserAccount;
 import services.BrotherhoodFloatService;
 import services.BrotherhoodService;
 import services.FloatPictureService;
 import domain.Brotherhood;
 import domain.BrotherhoodFloat;
 import domain.FloatPicture;
+import forms.FloatForm;
 
 @Controller
 @RequestMapping("/bfloat")
@@ -61,18 +59,18 @@ public class BrotherhoodFloatController extends AbstractController {
 	}
 
 	// My List -------------------------------------------------------------
-	@RequestMapping(value = "/myList", method = RequestMethod.GET)
-	public ModelAndView mylist() {
+	@RequestMapping(value = "brother/list", method = RequestMethod.GET)
+	public ModelAndView mylist(@RequestParam(required = false) final Integer id) {
 		ModelAndView result;
+		final Brotherhood bro;
+		if (id == null || id == 0)
+			bro = this.broService.findPrincipal();
+		else {
+			bro = this.broService.findById(id);
+			Assert.notNull(bro);
+		}
 
-		final UserAccount userAccount = LoginService.getPrincipal();
-		final Authority broAuthority = new Authority();
-		broAuthority.setAuthority("BROTHERHOOD");
-		Assert.isTrue(userAccount.getAuthorities().contains(broAuthority));
-
-		final Brotherhood bro = this.broService.findPrincipal();
-		final int broId = bro.getId();
-		final Collection<BrotherhoodFloat> bFloats = this.bFloatService.findByBrotherhood(broId);
+		final Collection<BrotherhoodFloat> bFloats = this.bFloatService.findByBrotherhood(bro.getId());
 		result = new ModelAndView("bfloat/myList");
 		result.addObject("brotherhoodFloats", bFloats);
 		result.addObject("requestURI", "bfloat/myList.do");
@@ -94,7 +92,7 @@ public class BrotherhoodFloatController extends AbstractController {
 		try {
 			r = this.bFloatService.findById(bFloatID);
 			b = r.getOwner();
-			fps = this.fPictureService.findAllByBFloat(bFloatID);
+			fps = this.fPictureService.findByFloat(bFloatID);
 
 		} catch (final Exception e) {
 			JOptionPane.showMessageDialog(null, "Forbidden operation");
@@ -109,7 +107,7 @@ public class BrotherhoodFloatController extends AbstractController {
 	}
 
 	// Create & Edit -----------------------------------------------------------
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	@RequestMapping(value = "super/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 
 		final BrotherhoodFloat bFloat = this.bFloatService.create();
@@ -119,7 +117,7 @@ public class BrotherhoodFloatController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	@RequestMapping(value = "super/update", method = RequestMethod.GET)
 	public ModelAndView update(@RequestParam final int bFloatID) {
 		ModelAndView result;
 		BrotherhoodFloat bFloat;
@@ -128,45 +126,38 @@ public class BrotherhoodFloatController extends AbstractController {
 			bFloat = this.bFloatService.findById(bFloatID);
 			final Brotherhood principal = this.broService.findPrincipal();
 			Assert.isTrue(bFloat.getOwner().equals(principal));
+			result = this.createEditModelAndView(bFloat);
 		} catch (final Exception e) {
 			JOptionPane.showMessageDialog(null, "Forbidden operation");
 			result = new ModelAndView("redirect:/bfloat/myList.do");
 			return result;
 		}
 
-		result = this.createEditModelAndView(bFloat);
-
 		return result;
 	}
 
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final BrotherhoodFloat bFloat, final BindingResult binding) {
+	@RequestMapping(value = "super/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final FloatForm bFloat, final BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors()) {
 			final List<ObjectError> errors = binding.getAllErrors();
 			for (final ObjectError e : errors)
 				System.out.println(e.toString());
-			result = this.createEditModelAndView(bFloat);
+			result = this.createEditModelAndView(this.bFloatService.parseForm(bFloat));
 
 		} else
 			try {
-				if (bFloat.getId() != 0) {
-					// Check principal own this float
-					final Brotherhood principal = this.broService.findPrincipal();
-					Assert.isTrue(bFloat.getOwner().equals(principal));
-				}
-
 				this.bFloatService.save(bFloat);
 				result = new ModelAndView("redirect:/bfloat/myList.do");
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(bFloat, "bFloat.commit.error");
+				result = this.createEditModelAndView(this.bFloatService.parseForm(bFloat), "bFloat.commit.error");
 			}
 		return result;
 	}
 
 	// Delete ------------------------------------------------------
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	@RequestMapping(value = "super/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(final BrotherhoodFloat bFloat, final BindingResult binding) {
 		ModelAndView result;
 
@@ -188,21 +179,19 @@ public class BrotherhoodFloatController extends AbstractController {
 
 	// Ancillary methods ------------------------------------------------------
 	protected ModelAndView createEditModelAndView(final BrotherhoodFloat bFloat) {
-		ModelAndView result;
+		return this.createEditModelAndView(bFloat, null);
 
-		result = this.createEditModelAndView(bFloat, null);
-
-		return result;
 	}
 
 	protected ModelAndView createEditModelAndView(final BrotherhoodFloat bFloat, final String message) {
 		ModelAndView result;
 		final int bFloatId = bFloat.getId();
-		final Collection<FloatPicture> fPictures = this.fPictureService.findAllByBFloat(bFloatId);
+
+		final Collection<FloatPicture> fPictures = this.fPictureService.findByFloat(bFloatId);
+		final FloatForm form = this.bFloatService.formatForm(bFloat);
 
 		result = new ModelAndView("bfloat/edit");
-		result.addObject("brotherhoodfFoat", bFloat);
-		result.addObject("floatPictures", fPictures);
+		result.addObject("floatForm", form);
 		return result;
 	}
 }

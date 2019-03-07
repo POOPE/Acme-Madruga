@@ -19,39 +19,36 @@
 
 	<jstl:if test="${row.isInFinalMode}">
 	<!-- ticker -->
-	<spring:message code="procession.ticker" var="tickerHeader" />
-	<display:column property="ticker" title="${tickerHeader}"
+	
+	<display:column property="ticker" 
 		sortable="true" />
 
 
 	<!-- title -->
-	<spring:message code="procession.title" var="titleHeader" />
-	<display:column property="title" title="${titleHeader}"
+<%-- 	<spring:message code="procession.title" var="titleHeader" /> --%>
+	<display:column property="title" titleKey="procession.title"
 		sortable="true" />
 
 
 	<!-- description -->
-	<spring:message code="procession.description" var="descriptionHeader" />
-	<display:column property="description" title="${descriptionHeader}"
+	<display:column property="description" titleKey="procession.description"
 		sortable="false" />
 
 
 	<!-- moment -->
-	<spring:message code="procession.moment" var="momentHeader" />
-	<display:column property="moment" title="${momentHeader}"
+	
+	<display:column property="moment" titleKey="procession.moment"
 		sortable="true" format="{0,date,dd/MM/yyyy HH:mm}" />
 
 
 	<!-- category -->
-	<spring:message code="procession.brotherhood" var="brotherhoodHeader" />
-	<display:column property="procession.brotherhood.title" title="${brotherhoodHeader}"
+	<display:column property="brotherhood.title" titleKey="procession.brotherhood"
 		sortable="true" />
 
 
 
 	<!-- Display -->	
-	<spring:message code="procession.display" var="displayHeader" />
-	<display:column title="${displayHeader}">
+	<display:column titleKey="procession.display">
 		<a href="procession/display.do?processionID=${row.id}"> <spring:message
 				code="procession.display" /></a>
 	</display:column>
@@ -60,8 +57,7 @@
 	
 	<!-- Update -->
 	<security:authorize access="hasRole('BROTHERHOOD')">
-		<spring:message code="procession.update" var="updateHeader" />
-		<display:column title="${updateHeader}">
+		<display:column titleKey="procession.update">
 			<a href="procession/update.do?processionID=${row.id}"> <spring:message
 					code="procession.update" /></a>
 		</display:column>

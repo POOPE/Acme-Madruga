@@ -45,7 +45,43 @@
 
 <div>
 	<ul id="jMenu">
-
+		<!-- brotherhoods -->
+			<li><a class="fNiv"><spring:message
+						code="master.page.brotherhood" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="brotherhood/list.do"><spring:message
+								code="master.page.browse" /></a></li>
+				</ul></li>
+		<!-- processions -->
+			<li><a class="fNiv"><spring:message
+						code="master.page.procession" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="procession/list.do"><spring:message
+								code="master.page.browse" /></a></li>
+					<security:authorize access="hasRole('BROTHERHOOD')">
+					<li><a href="procession/brother/list.do"><spring:message
+								code="master.page.mine" /></a></li>
+					<li><a href="procession/super/create.do"><spring:message
+								code="master.page.create" /></a></li>
+					</security:authorize>
+				</ul></li>
+	<!-- floats -->
+			<li><a class="fNiv"><spring:message
+						code="master.page.bfloat" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="bfloat/list.do"><spring:message
+								code="master.page.browse" /></a></li>
+					<security:authorize access="hasRole('BROTHERHOOD')">
+					<li><a href="bfloat/brother/list.do"><spring:message
+								code="master.page.mine" /></a></li>
+					<li><a href="bfloat/super/create.do"><spring:message
+								code="master.page.create" /></a></li>
+					</security:authorize>
+				</ul></li>
+		<!-- admin -->
 		<security:authorize access="hasRole('ADMIN')">
 			<li><a class="fNiv"><spring:message
 						code="master.page.administrator" /></a>
@@ -58,58 +94,12 @@
 				</ul></li>
 		</security:authorize>
 
-		<security:authorize access="hasRole('MEMBER')">
-			<li><a class="fNiv"><spring:message
-						code="master.page.customer" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a class="fNiv" href="procession/list.do"><spring:message
-								code="master.page.procession" /></a></li>
-				</ul></li>
-		</security:authorize>
-
-		<security:authorize access="hasRole('BROTHERHOOD')">
-			<li><a class="fNiv"><spring:message
-						code="master.page.reviewer" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="announcement/reviewer/list-to-review.do"><spring:message
-								code="master.page.customer.list-to-review" /></a></li>
-				</ul></li>
-
-			<li><a class="fNiv"><spring:message
-						code="master.page.brotherhood" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="bfloat/myList.do"><spring:message
-								code="master.page.brotherhood.bfloat.mylist" /></a></li>
-					<li><a href="procession/brother/list.do"><spring:message
-								code="master.page.brotherhood.procession.mylist" /></a></li>
-				</ul></li>
-		</security:authorize>
 
 		<security:authorize access="isAnonymous()">
-			<li><a class="fNiv"><spring:message
-						code="master.page.procession" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="procession/list.do"><spring:message
-								code="master.page.browse" /></a></li>
-				</ul></li>
-			<li><a class="fNiv"><spring:message
-						code="master.page.bfloat" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="bfloat/list.do"><spring:message
-								code="master.page.browse" /></a></li>
-
-				</ul></li>
-
 			<li><a class="fNiv" href="security/login.do"><spring:message
 						code="master.page.login" /></a></li>
 			<li><a class="fNiv" href="actor/register.do"><spring:message
 						code="master.page.register" /></a></li>
-
 		</security:authorize>
 
 		<security:authorize access="isAuthenticated()">
