@@ -24,7 +24,7 @@ public class BrotherhoodService {
 	@Autowired
 	private AttachmentService		attachmentService;
 	@Autowired
-	private BrotherhoodFloatService		bFloatService;
+	private BrotherhoodFloatService	bFloatService;
 
 
 	public Brotherhood findPrincipal() {
@@ -65,7 +65,4 @@ public class BrotherhoodService {
 
 	}
 
-	public Brotherhood findByBFloat(final int bFloatId){
-		return this.bFloatService.findById(bFloatId).getBrotherhood();
-	}
 }

@@ -257,5 +257,35 @@
 	<bean id="position7" class="domain.Position">
 		<property name="title" value="Officer" />
 	</bean>
+	
+	<!-- procession -->
+	<bean id="procession1" class="domain.Procession">
+		<property name="ticker" value="000420-BLAZE" />
+		<property name="moment" value="04/20/2000 04:20" />
+		<property name="isInFinalMode" value="true" />
+		<property name="title" value="la procesion de las procesionarias" />
+		<property name="description" value="its just a test vro" />
+		<property name="brotherhood" ref="brother1" />
+		<property name="bFloats">
+			<list>
+				<ref bean="float1"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- float -->
+	
+	<bean id="float1" class="domain.BrotherhoodFloat">
+		<property name="title" value="la urticaria" />
+		<property name="description" value="pican pican los mosquito" />
+		<property name="owner" ref="brother1" />
+	</bean>
+	
+	<!-- float picture -->
+	
+	<bean id="floatPic1" class="domain.FloatPicture">
+		<property name="owner" ref="float1" />
+		<property name="url" value="https://i.kym-cdn.com/photos/images/newsfeed/000/674/934/422.jpg" />
+	</bean>
 
 </beans>

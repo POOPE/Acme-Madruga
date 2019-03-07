@@ -48,17 +48,13 @@
 		<security:intercept-url pattern="/bfloat/list.do" access="permitAll" /> 
 		<security:intercept-url pattern="/bfloat/display.do" access="permitAll" /> 
 		
-		<security:intercept-url pattern="/procession/myList.do" access="hasRole('BROTHERHOOD')" /> 
-		<security:intercept-url pattern="/procession/edit.do" access="hasRole('BROTHERHOOD')" /> 
-		<security:intercept-url pattern="/procession/create.do" access="hasRole('BROTHERHOOD')" />
-		<security:intercept-url pattern="/procession/update.do" access="hasRole('BROTHERHOOD')" />
-		<security:intercept-url pattern="/procession/list.do" access="permitAll" /> 
-		<security:intercept-url pattern="/procession/display.do" access="permitAll" /> 
+		<security:intercept-url pattern="/procession/brother/**" access="hasRole('BROTHERHOOD')" /> 
+		<security:intercept-url pattern="/procession/**" access="permitAll" /> 
+
 		
 		
 		<security:intercept-url pattern="/brotherhood/**" access="hasRole('BROTHERHOOD')" />
 		<security:intercept-url pattern="/logs/admin/**" access="hasRole('ADMIN')" />
-		<security:intercept-url pattern="/brotherhood/**" access="hasRole('BROTHERHOOD')" /> 
 		<security:intercept-url pattern="/actor/**" access="permitAll" /> 
 		<security:intercept-url pattern="/user/**" access="isAuthenticated()" /> 
 	

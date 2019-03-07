@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+
 import repositories.ProcessionRepository;
 import domain.Brotherhood;
 import domain.Procession;
@@ -19,7 +20,8 @@ public class ProcessionService {
 	@Autowired
 	private ProcessionRepository	processionRepo;
 	@Autowired
-	private BrotherhoodService			brotherhoodService;
+	private BrotherhoodService		brotherhoodService;
+
 
 	public Procession save(final Procession procession) {
 		return this.processionRepo.save(procession);
@@ -28,15 +30,14 @@ public class ProcessionService {
 
 	public void delete(final Procession procession) {
 
-
-		Brotherhood bro = this.brotherhoodService.findPrincipal();
+		final Brotherhood bro = this.brotherhoodService.findPrincipal();
 		Assert.isTrue(procession.getBrotherhood().equals(bro));
 		this.processionRepo.delete(procession);
 	}
 
 	public Procession create() {
-		Brotherhood brotherhood = this.brotherhoodService.findPrincipal();
-		Procession  result = new Procession();
+		final Brotherhood brotherhood = this.brotherhoodService.findPrincipal();
+		final Procession result = new Procession();
 		result.setBrotherhood(brotherhood);
 		final Date date = new Date();
 		date.setTime(date.getTime() - 5000);
@@ -45,17 +46,16 @@ public class ProcessionService {
 		return result;
 	}
 
-
 	public List<Procession> findAll() {
 		return this.processionRepo.findAll();
 	}
 
-	public Procession findById(int id) {
+	public Procession findById(final int id) {
 		return this.processionRepo.findOne(id);
 	}
 
 	public List<Procession> findByBrotherhood(final int brotherhoodId) {
 		return this.processionRepo.findByBrotherhood(brotherhoodId);
-}
+	}
 
 }

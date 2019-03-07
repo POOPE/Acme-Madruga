@@ -4,15 +4,16 @@ package domain;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -25,13 +26,27 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Procession extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
-	private String ticker;
-	private Date moment;
-	private Boolean	isInFinalMode;
+	private String					ticker;
+	private Date					moment;
+	private Boolean					isInFinalMode;
+	private Brotherhood				brotherhood;
+	private String					title;
+	private String					description;
+	private List<BrotherhoodFloat>	bFloats;
+
+
+	@ManyToMany
+	public List<BrotherhoodFloat> getbFloats() {
+		return this.bFloats;
+	}
+
+	public void setbFloats(final List<BrotherhoodFloat> bFloats) {
+		this.bFloats = bFloats;
+	}
 
 	@NotBlank
 	@Column(unique = true)
-	@Pattern(regexp = "^([0-9]{2})(0[1-9]|1[012])(0[1-9]|[12]\\d|3[01])(-)([A-Z]{5})$")
+	@Pattern(regexp = "^([0-9]{6})(-)([A-Z]{5})$")
 	public String getTicker() {
 		return this.ticker;
 	}
@@ -39,10 +54,6 @@ public class Procession extends DomainEntity {
 	public void setTicker(final String ticker) {
 		this.ticker = ticker;
 	}
-
-	private String	title;
-	private String	description;
-
 
 	@NotBlank
 	public String getTitle() {
@@ -53,7 +64,6 @@ public class Procession extends DomainEntity {
 		this.title = title;
 	}
 
-	
 	@NotBlank
 	public String getDescription() {
 		return this.description;
@@ -70,7 +80,6 @@ public class Procession extends DomainEntity {
 	public void setIsInFinalMode(final Boolean isInFinalMode) {
 		this.isInFinalMode = isInFinalMode;
 	}
-	
 
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
@@ -82,24 +91,17 @@ public class Procession extends DomainEntity {
 	public void setMoment(final Date moment) {
 		this.moment = moment;
 	}
-	
+
 	// Relationships ----------------------------------------------------------
-	private Brotherhood	brotherhood;
 
-
-
-	@Valid
-	@NotNull
 	@ManyToOne(optional = false)
-	public Brotherhood	getBrotherhood() {
+	public Brotherhood getBrotherhood() {
 		return this.brotherhood;
 	}
 
 	public void setBrotherhood(final Brotherhood brotherhood) {
 		this.brotherhood = brotherhood;
 	}
-
-
 
 	// Methods ----------------------------------------------------------
 	public String generateTicker() {
@@ -114,6 +116,6 @@ public class Procession extends DomainEntity {
 
 	@Override
 	public String toString() {
-		return "Procession [ticker=" + this.ticker  + "title=" + this.title + "]";
+		return "Procession [ticker=" + this.ticker + "title=" + this.title + "]";
 	}
 }

@@ -12,7 +12,6 @@ import domain.Procession;
 @Repository
 public interface ProcessionRepository extends JpaRepository<Procession, Integer> {
 
-    @Query("select p from Procession p where p.brotherhood.id = ?1")
-    public List<Procession> findByBrotherhood(int brotherhoodId);
-
+	@Query("select a from Procession a where a.brotherhood.id=?1")
+	public List<Procession> findByBrotherhood(int id);
 }

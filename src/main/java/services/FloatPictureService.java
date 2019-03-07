@@ -17,6 +17,7 @@ public class FloatPictureService {
 	@Autowired
 	private FloatPictureRepository	fPictureRepository;
 
+
 	public FloatPicture create() {
 		return new FloatPicture();
 	}
@@ -33,11 +34,11 @@ public class FloatPictureService {
 		return this.fPictureRepository.findAll();
 	}
 
-	public  FloatPicture findById(final int id) {
+	public FloatPicture findById(final int id) {
 		return this.fPictureRepository.findOne(id);
 	}
 
-	public  List<FloatPicture> findAllByBFloat(final int bFloatId) {
-		return this.fPictureRepository.findAllByBFloat(bFloatId);
+	public List<FloatPicture> findByFloat(final int bFloatId) {
+		return this.fPictureRepository.findByFloat(bFloatId);
 	}
 }

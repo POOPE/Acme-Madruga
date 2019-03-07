@@ -12,7 +12,7 @@ import domain.BrotherhoodFloat;
 @Repository
 public interface BrotherhoodFloatRepository extends JpaRepository<BrotherhoodFloat, Integer> {
 
-    @Query("select bf from BrotherhoodFloat bf where bf.brotherhood.id = ?1")
-    public List<BrotherhoodFloat> findByBrotherhood(int brotherhoodId);
+	@Query("select a from BrotherhoodFloat a where a.owner.id = ?1")
+	public List<BrotherhoodFloat> findByBrotherhood(int brotherhoodId);
 
 }

@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import repositories.EnrollmentRepository;
 import domain.Brotherhood;
 import domain.Enrollment;
 import domain.Member;
-import repositories.EnrollmentRepository;
 
 @Service
 @Transactional
@@ -52,8 +52,12 @@ public class EnrollmentService {
 		return this.enrollmentRepository.findOne(enrollmentId);
 	}
 
-	public List<Enrollment> findByAuthor(final Member member) {
-		return this.enrollmentRepository.findByAuthor(member.getId());
+	public List<Enrollment> findByMember(final Member member) {
+		return this.enrollmentRepository.findByMember(member.getId());
+	}
+
+	public List<Enrollment> findByBrotherhood(final Brotherhood brotherhood) {
+		return this.enrollmentRepository.findByBrotherhood(brotherhood.getId());
 	}
 
 	public List<Enrollment> findAll() {

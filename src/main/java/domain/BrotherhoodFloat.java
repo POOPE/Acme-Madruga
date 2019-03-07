@@ -12,9 +12,9 @@ import org.hibernate.validator.constraints.NotBlank;
 @Access(AccessType.PROPERTY)
 public class BrotherhoodFloat extends DomainEntity {
 
-	private String	title;
-	private String	description;
-	private Brotherhood brotherhood;
+	private String		title;
+	private String		description;
+	private Brotherhood	owner;
 
 
 	@NotBlank
@@ -26,7 +26,6 @@ public class BrotherhoodFloat extends DomainEntity {
 		this.title = title;
 	}
 
-	
 	@NotBlank
 	public String getDescription() {
 		return this.description;
@@ -36,20 +35,18 @@ public class BrotherhoodFloat extends DomainEntity {
 		this.description = description;
 	}
 
-	@NotBlank
-	@ManyToOne(optional=false)
-	public Brotherhood  getBrotherhood(){
-		return this.brotherhood;
+	@ManyToOne(optional = false)
+	public Brotherhood getOwner() {
+		return this.owner;
 	}
 
-	public void setBrotherhood(final Brotherhood brotherhood){
-		this.brotherhood = brotherhood;
+	public void setOwner(final Brotherhood brotherhood) {
+		this.owner = brotherhood;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "BrotherhoodFloat [title=" + this.title  + "description=" + this.description + "]";
+		return "BrotherhoodFloat [title=" + this.title + "description=" + this.description + "]";
 	}
-
 
 }

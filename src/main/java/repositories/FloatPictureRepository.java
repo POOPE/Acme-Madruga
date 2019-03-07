@@ -12,7 +12,7 @@ import domain.FloatPicture;
 @Repository
 public interface FloatPictureRepository extends JpaRepository<FloatPicture, Integer> {
 
-	@Query("select f from FloatPicture f where f.bFloat.id = ?1")
-    public List<FloatPicture> findAllByBFloat(int bFloatId);
+	@Query("select a from FloatPicture a where a.owner.id=?1")
+	public List<FloatPicture> findByFloat(int id);
 
 }
