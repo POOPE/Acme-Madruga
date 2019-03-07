@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Brotherhood;
@@ -55,6 +56,7 @@ public class EnrollmentController extends AbstractController {
 		result.addObject("requestURI", "enrollments/list.do");
 		return result;
 	}
+	// List de enrollments de members -------------------------------------------------------------
 
 	@RequestMapping(value = "/member/list", method = RequestMethod.GET)
 	public ModelAndView myList() {
@@ -67,25 +69,17 @@ public class EnrollmentController extends AbstractController {
 		return result;
 	}
 
-	// My List -------------------------------------------------------------
-	//	@RequestMapping(value = "enrollment/member/list", method = RequestMethod.GET)
-	//	public ModelAndView mylist(@RequestParam(required = false) final Integer id) {
-	//		ModelAndView result;
-	//		final Brotherhood bro;
-	//		if (id == null || id == 0)
-	//			bro = this.broService.findPrincipal();
-	//		else {
-	//			bro = this.broService.findById(id);
-	//			Assert.notNull(bro);
-	//		}
-	//
-	//		final Collection<Enrollment> enrollments = this.processionService.findByBrotherhood(bro.getId());
-	//		result = new ModelAndView("enrollment/myList");
-	//		result.addObject("enrollments", enrollments);
-	//		result.addObject("requestURI", "enrollment/myList.do");
-	//
-	//		return result;
-	//	}
+	// Create & Edit -----------------------------------------------------------
+	@RequestMapping(value = "member/create", method = RequestMethod.GET)
+	public ModelAndView enrolling(@RequestParam final int brodelID) {
+
+		final Brotherhood brodel = this.broService.findById(brodelID);
+		final Enrollment enroll = this.enrollmentService.create(brodel);
+
+		final ModelAndView result = this.createEditModelAndView(enroll);
+
+		return result;
+	}
 
 	//DISPLAY	--------------------------------------------------------------
 	//	@RequestMapping(value = "/display", method = RequestMethod.GET)
@@ -112,16 +106,7 @@ public class EnrollmentController extends AbstractController {
 	//		return result;
 	//	}
 	//
-	//	// Create & Edit -----------------------------------------------------------
-	//	@RequestMapping(value = "super/create", method = RequestMethod.GET)
-	//	public ModelAndView create() {
-	//
-	//		final Procession procession = this.processionService.create();
-	//
-	//		final ModelAndView result = this.createEditModelAndView(procession);
-	//
-	//		return result;
-	//	}
+
 	//
 	//	@RequestMapping(value = "super/update", method = RequestMethod.GET)
 	//	public ModelAndView update(@RequestParam final int processionID) {
@@ -190,23 +175,21 @@ public class EnrollmentController extends AbstractController {
 	//		return result;
 	//	}
 
-	// Ancillary methods ------------------------------------------------------
-	//	protected ModelAndView createEditModelAndView(final Procession procession) {
-	//		ModelAndView result;
-	//
-	//		result = this.createEditModelAndView(procession, null);
-	//
-	//		return result;
-	//	}
-	//
-	//	protected ModelAndView createEditModelAndView(final Procession procession, final String message) {
-	//		ModelAndView result;
-	//		final int processionId = procession.getId();
-	//		final Collection<FloatPicture> fPictures = this.fPictureService.findByFloat(processionId);
-	//
-	//		result = new ModelAndView("procession/edit");
-	//		result.addObject("procession", procession);
-	//		result.addObject("floatPictures", fPictures);
-	//		return result;
-	//	}
+	//Ancillary methods ------------------------------------------------------
+	protected ModelAndView createEditModelAndView(final Enrollment enrollment) {
+		ModelAndView result;
+
+		result = this.createEditModelAndView(enrollment, null);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView(final Enrollment enrollment, final String message) {
+		ModelAndView result;
+
+		result = new ModelAndView("enrollment/edit");
+		result.addObject("enrollment", enrollment);
+
+		return result;
+	}
 }

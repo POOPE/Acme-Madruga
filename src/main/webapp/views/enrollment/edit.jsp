@@ -18,52 +18,45 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<form:form action="procession/edit.do" modelAttribute="procession">
+<form:form action="enrollment/edit.do" modelAttribute="enrollment">
 	
 	<%-- Hidden properties from procession--%>
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="brotherhood" />
-	<form:hidden path="ticker"/>
-
+	<form:hidden path="member"/>
+	<form:hidden path="moment"/>
 	
-	<%-- description--%>
-	<form:label path="description">
-		<spring:message code="procession.description" />
+	<%-- status--%>
+	<form:label path="status">
+		<spring:message code="enrollment.status" />
 	</form:label>
-	<form:textarea path="description" />	
-	<form:errors class="error" path="description" />
-	<br><br>
-
-	<%-- title --%>
-	<form:label path="title">
-		<spring:message code="procession.title" />
-	</form:label>
-	<form:input path="title" />	
-	<form:errors class="error" path="title" />
+	<form:textarea path="status" />	
+	<form:errors class="error" path="status" />
 	<br><br>
 	
-	<%-- moment --%>
-	<form:label path="moment">
-		<spring:message code="procession.moment" />
+	<%-- position--%>
+	<form:label path="position">
+		<spring:message code="enrollment.position" />
 	</form:label>
-	<form:input path="moment" placeholder="dd/mm/yyyy" format="{0,date,dd/MM/yyyy HH:mm}" />	
-	<form:errors class="error" path="moment" />
+	<form:textarea path="position" />
+	<form:errors class="error" path="position" />
 	<br><br>
+
 	
 	<%-- Buttons --%>
 	<security:authorize access="hasRole('BROTHERHOOD')">
 		<input type="submit" name="save" 
-			value="<spring:message code="procession.save"/>"/>
+			value="<spring:message code="enrollment.save"/>"/>
 		
-		<jstl:if test="${procession.id != 0}">	
+		<jstl:if test="${enrollment.id != 0}">	
 		<input type="submit" name="delete" 
-			value="<spring:message code="procession.delete"/>"/>
+			value="<spring:message code="enrollment.delete"/>"/>
 		</jstl:if>
 			
 		<input type="button" name="cancel"
-			value="<spring:message code="procession.cancel" />"
-			onClick="javascript: window.location.replace('procession/myList.do')" />
+			value="<spring:message code="enrollment.cancel" />"
+			onClick="javascript: window.location.replace('enrollment/brotherhood/list.do')" />
 			
 	</security:authorize>
 	<br><br>

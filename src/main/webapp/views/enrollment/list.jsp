@@ -27,8 +27,13 @@
 		
 		
 		 
-		<display:column property="member.name" titleKey="enrollment.member"
-		 />
+		<display:column property="member.name" titleKey="enrollment.member"/>
+		 
+		 
+		<display:column titleKey="enrollment.edit">
+			<a href="enrollment/edit.do?brodelID=${row.id}">
+			 <spring:message code="enrollment.edit" /></a>
+		</display:column>
 		
 		</security:authorize>	
 		

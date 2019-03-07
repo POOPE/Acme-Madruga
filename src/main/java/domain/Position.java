@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Access(AccessType.PROPERTY)
 public class Position extends DomainEntity {
 
-	private String	Title;
+	private String Title;
 
 
 	@NotBlank

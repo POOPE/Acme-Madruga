@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import repositories.EnrollmentRepository;
 import domain.Brotherhood;
 import domain.Enrollment;
 import domain.Member;
+import repositories.EnrollmentRepository;
 
 @Service
 @Transactional
@@ -68,6 +68,7 @@ public class EnrollmentService {
 
 		e.setMoment(new Date());
 		e.setStatus(Enrollment.ACCEPTED);
+
 		//y el position?
 		return e;
 	}

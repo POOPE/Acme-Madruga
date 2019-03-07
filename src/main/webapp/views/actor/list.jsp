@@ -33,6 +33,12 @@
 			</a>
 		</display:column>
 		
+		<display:column>
+		<spring:message code="actor.join" var="joino" />
+			<a href="enrollment/member/create.do?brodelID=${row.id}"> <jstl:out value="${joino}" />
+			</a>
+		</display:column>
+		
 		
 		
 	</jstl:if>
