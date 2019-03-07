@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ * PopulateDatabase.xml
+ *
+ * Copyright (C) 2019 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+	
+	<!-- User accounts -->
+
+	<bean id="userAccount1" class="security.UserAccount">
+		<property name="username" value="admin1" />
+		<property name="password" value="325a2cc052914ceeb8c19016c091d2ac" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount2" class="security.UserAccount">
+		<property name="username" value="member1" />
+		<property name="password" value="325a2cc052914ceeb8c19016c091d2ac" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MEMBER" />
+				</bean>
+			</list>
+		</property>
+	</bean>	
+	
+	<bean id="userAccount3" class="security.UserAccount">
+		<property name="username" value="member2" />
+		<property name="password" value="325a2cc052914ceeb8c19016c091d2ac" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MEMBER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="member3" />
+		<property name="password" value="325a2cc052914ceeb8c19016c091d2ac" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MEMBER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="brother1" />
+		<property name="password" value="325a2cc052914ceeb8c19016c091d2ac" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="BROTHERHOOD" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount6" class="security.UserAccount">
+		<property name="username" value="brother2" />
+		<property name="password" value="325a2cc052914ceeb8c19016c091d2ac" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="BROTHERHOOD" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Administrators -->
+	
+	<bean id="admin1" class="domain.Administrator">
+		<property name="name" value="Ad" />
+		<property name="middleName" value="min" />
+		<property name="surname" value="1" />
+		<property name="email" value="admin11@mail.com" />
+		<property name="countryCode" value="34" />
+		<property name="areaCode" value="" />
+		<property name="phoneNumber" value="666666666" />
+		<property name="address" value="Admin address 1" />
+		<property name="photo" value="https://www.bewelcome.org/members/avatar/doge?500"/>
+		<property name="userAccount" ref="userAccount1" />		
+	</bean>
+		
+	<!-- members -->
+	
+	<bean id="member1" class="domain.Member">
+		<property name="name" value="Mem" />
+		<property name="middleName" value="ber" />
+		<property name="surname" value="1" />
+		<property name="email" value="member1@mail.com" />
+		<property name="countryCode" value="34" />
+		<property name="areaCode" value="" />
+		<property name="phoneNumber" value="666666666" />
+		<property name="address" value="Address 1" />
+		<property name="photo" value="https://www.bewelcome.org/members/avatar/doge?500"/>
+		<property name="userAccount" ref="userAccount2" />		
+	</bean>
+	
+	<bean id="member2" class="domain.Member">
+		<property name="name" value="Mem" />
+		<property name="middleName" value="ber" />
+		<property name="surname" value="2" />
+		<property name="email" value="member2@mail.com" />
+		<property name="countryCode" value="34" />
+		<property name="areaCode" value="" />
+		<property name="phoneNumber" value="666666666" />
+		<property name="address" value="Address 2" />
+		<property name="photo" value="https://www.bewelcome.org/members/avatar/doge?500"/>
+		<property name="userAccount" ref="userAccount3" />		
+	</bean>
+	
+	<bean id="member3" class="domain.Member">
+		<property name="name" value="Mem" />
+		<property name="middleName" value="ber" />
+		<property name="surname" value="3" />
+		<property name="email" value="member1@mail.com" />
+		<property name="countryCode" value="34" />
+		<property name="areaCode" value="" />
+		<property name="phoneNumber" value="666666666" />
+		<property name="address" value="Address 3" />
+		<property name="photo" value="https://www.bewelcome.org/members/avatar/doge?500"/>
+		<property name="userAccount" ref="userAccount4" />		
+	</bean>
+	
+	<!-- Reviewers -->
+	
+	<bean id="brother1" class="domain.Brotherhood">
+		<property name="name" value="Brother" />
+		<property name="middleName" value="hood" />
+		<property name="surname" value="1" />
+		<property name="email" value="ergranpodeh@mail.com" />
+		<property name="countryCode" value="34" />
+		<property name="areaCode" value="" />
+		<property name="phoneNumber" value="666666666" />
+		<property name="address" value="Address 3" />
+		<property name="photo" value="https://www.bewelcome.org/members/avatar/doge?500"/>
+		<property name="userAccount" ref="userAccount5" />	
+		<property name="title" value="EL GRAN PODEH"/>
+		<property name="estDate" value="15/11/2017 20:32"/>			
+	</bean>
+	
+	<bean id="brother2" class="domain.Brotherhood">
+		<property name="name" value="Brother" />
+		<property name="middleName" value="hood" />
+		<property name="surname" value="2" />
+		<property name="email" value="brother2@mail.com" />
+		<property name="countryCode" value="34" />
+		<property name="areaCode" value="" />
+		<property name="phoneNumber" value="666666666" />
+		<property name="address" value="Address 33" />
+		<property name="photo" value="https://www.bewelcome.org/members/avatar/doge?500"/>
+		<property name="userAccount" ref="userAccount6" />	
+		<property name="title" value="LA BORRICA"/>
+		<property name="estDate" value="15/11/2017 20:32"/>		
+	</bean>	
+	
+	
+</beans>
